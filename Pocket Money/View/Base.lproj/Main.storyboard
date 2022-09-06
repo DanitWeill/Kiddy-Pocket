@@ -1344,7 +1344,6 @@
         <!--Navigation Controller-->
         <scene sceneID="zYt-Bw-2zJ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="58m-XT-BaU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController wantsFullScreenLayout="YES" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="gd1-ll-voN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="4BB-7A-F6P"/>
@@ -1361,6 +1360,7 @@
                         <segue destination="ZOD-x0-5Jh" kind="relationship" relationship="rootViewController" id="Hd8-aw-NoE"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="58m-XT-BaU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5617" y="-635"/>
         </scene>
