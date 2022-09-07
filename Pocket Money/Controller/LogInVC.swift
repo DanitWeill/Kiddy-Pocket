@@ -19,8 +19,7 @@ class LogInVC: UIViewController {
         super.viewDidLoad()
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
-        
-        //        navigationItem.leftBarButtonItem?.customView?.isHidden = false
+   
     }
     
     @objc func tap(sender: UITapGestureRecognizer){
@@ -67,6 +66,12 @@ class LogInVC: UIViewController {
         }
     }
     
+    @IBAction func forgotPasswordButtonPressed(_ sender: UIButton) {
+        
+        Auth.auth().sendPasswordReset(withEmail: self.usernameTextField.text ?? "") { error in
+            // Your code here
+        }
+    }
 }
 
 extension LogInVC {

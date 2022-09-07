@@ -109,22 +109,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wq3-Kw-4Rf">
-                                <rect key="frame" x="142" y="476" width="130" height="50"/>
-                                <color key="backgroundColor" red="0.96748203040000003" green="0.80516666169999995" blue="0.2743012011" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="130" id="1aX-Mt-FLX"/>
-                                    <constraint firstAttribute="height" constant="50" id="8Ck-y3-hDK"/>
-                                </constraints>
-                                <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Log In">
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="logInButton:" destination="Aan-ea-VN8" eventType="touchUpInside" id="VWi-El-Lid"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b4R-pe-XMA" userLabel="Pic Stack View">
                                 <rect key="frame" x="32" y="246" width="350" height="200"/>
                                 <subviews>
@@ -175,6 +159,34 @@
                                     <constraint firstAttribute="trailing" secondItem="AQZ-x7-pRf" secondAttribute="trailing" id="nzg-G3-jug"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q06-aY-BK2">
+                                <rect key="frame" x="129.5" y="432" width="155.5" height="31"/>
+                                <color key="backgroundColor" red="0.98700338600000004" green="0.9602515854673439" blue="0.66514397596690866" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Forgot my password">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="forgotPasswordButtonPressed:" destination="Aan-ea-VN8" eventType="touchUpInside" id="bKq-0e-Qp7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wq3-Kw-4Rf">
+                                <rect key="frame" x="142" y="476" width="130" height="50"/>
+                                <color key="backgroundColor" red="0.96748203040000003" green="0.80516666169999995" blue="0.2743012011" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="1aX-Mt-FLX"/>
+                                    <constraint firstAttribute="height" constant="50" id="8Ck-y3-hDK"/>
+                                </constraints>
+                                <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Log In">
+                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="logInButton:" destination="Aan-ea-VN8" eventType="touchUpInside" id="VWi-El-Lid"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9eo-4J-hIz"/>
                         <color key="backgroundColor" red="0.98721724749999995" green="0.93062049150000004" blue="0.45869737859999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -183,7 +195,9 @@
                             <constraint firstItem="pbr-Sb-3vm" firstAttribute="leading" secondItem="9eo-4J-hIz" secondAttribute="leading" constant="120" id="5eF-xs-ZeN"/>
                             <constraint firstItem="pbr-Sb-3vm" firstAttribute="top" secondItem="9eo-4J-hIz" secondAttribute="top" constant="100" id="6b7-u8-ip6"/>
                             <constraint firstItem="9eo-4J-hIz" firstAttribute="trailing" secondItem="pbr-Sb-3vm" secondAttribute="trailing" constant="120" id="BAX-I6-O9M"/>
+                            <constraint firstItem="q06-aY-BK2" firstAttribute="centerX" secondItem="guO-Wh-2C2" secondAttribute="centerX" id="Htc-W7-ZJU"/>
                             <constraint firstItem="0nz-hq-aFH" firstAttribute="centerX" secondItem="guO-Wh-2C2" secondAttribute="centerX" id="Iyq-kD-i3i"/>
+                            <constraint firstItem="Wq3-Kw-4Rf" firstAttribute="top" secondItem="q06-aY-BK2" secondAttribute="bottom" constant="13" id="VW4-dZ-8mt"/>
                             <constraint firstItem="b4R-pe-XMA" firstAttribute="top" secondItem="pbr-Sb-3vm" secondAttribute="bottom" constant="60" id="XO4-3K-x5b"/>
                             <constraint firstItem="b4R-pe-XMA" firstAttribute="centerX" secondItem="guO-Wh-2C2" secondAttribute="centerX" id="a7D-QV-KYu"/>
                             <constraint firstItem="Wq3-Kw-4Rf" firstAttribute="top" secondItem="b4R-pe-XMA" secondAttribute="bottom" constant="30" id="dHr-vV-eta"/>
@@ -282,13 +296,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgQ-j8-mm3">
-                                <rect key="frame" x="20" y="546" width="374" height="20.5"/>
+                                <rect key="frame" x="20" y="196" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="password error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PvS-Iv-PiM">
-                                <rect key="frame" x="20" y="576.5" width="374" height="20.5"/>
+                                <rect key="frame" x="20" y="226.5" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -297,7 +311,6 @@
                         <viewLayoutGuide key="safeArea" id="tyX-Tc-FtV"/>
                         <color key="backgroundColor" red="0.9478725791" green="0.83597015500517247" blue="0.45030978363792623" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="TgQ-j8-mm3" firstAttribute="top" secondItem="kU5-lP-0eN" secondAttribute="bottom" constant="20" id="7RG-Vh-mYu"/>
                             <constraint firstItem="kWK-q9-S4F" firstAttribute="centerX" secondItem="fRB-ou-Y0o" secondAttribute="centerX" id="AF4-6B-QRM"/>
                             <constraint firstItem="R2Y-i7-w31" firstAttribute="top" secondItem="LN0-Ys-ZIL" secondAttribute="bottom" constant="70" id="CKC-qt-zwU"/>
                             <constraint firstItem="tyX-Tc-FtV" firstAttribute="trailing" secondItem="TgQ-j8-mm3" secondAttribute="trailing" constant="20" id="EUW-El-2Jl"/>
@@ -309,6 +322,7 @@
                             <constraint firstItem="LN0-Ys-ZIL" firstAttribute="top" secondItem="tyX-Tc-FtV" secondAttribute="top" constant="100" id="RH3-13-2jA"/>
                             <constraint firstItem="kWK-q9-S4F" firstAttribute="top" secondItem="LN0-Ys-ZIL" secondAttribute="bottom" constant="60" id="RIg-M2-6Ye"/>
                             <constraint firstItem="PvS-Iv-PiM" firstAttribute="centerX" secondItem="fRB-ou-Y0o" secondAttribute="centerX" id="VI0-R4-3f4"/>
+                            <constraint firstItem="TgQ-j8-mm3" firstAttribute="top" secondItem="LN0-Ys-ZIL" secondAttribute="bottom" constant="10" id="Ybp-4n-aw7"/>
                             <constraint firstItem="tyX-Tc-FtV" firstAttribute="trailing" secondItem="PvS-Iv-PiM" secondAttribute="trailing" constant="20" id="fAP-1t-W5b"/>
                             <constraint firstItem="tyX-Tc-FtV" firstAttribute="trailing" secondItem="LN0-Ys-ZIL" secondAttribute="trailing" constant="120" id="hr2-dA-YdR"/>
                             <constraint firstItem="LN0-Ys-ZIL" firstAttribute="leading" secondItem="tyX-Tc-FtV" secondAttribute="leading" constant="120" id="sGx-Lp-Uan"/>
