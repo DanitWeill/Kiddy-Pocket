@@ -16,6 +16,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addFirstKidLabel: UILabel!
     
+    // benny
+    
     var kids: [Kid] = []
     
     var name = String()
