@@ -21,7 +21,7 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     
     let db = Firestore.firestore()
 
-    var currencyName = "ILS"
+    var currencyName = "EUR"
     let storage = Storage.storage().reference()
     var picturePath = String()
     var cellColor = UIColor(hexString: "#f5520c")

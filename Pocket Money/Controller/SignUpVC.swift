@@ -48,13 +48,13 @@ class SignUpVC: UIViewController {
                     }
                 }
             }
-        }else{
-            
             if let logInVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInVC") as? LogInVC {
                 let navVC = UINavigationController(rootViewController: logInVC)
                 
                 self.present(navVC, animated: true, completion: nil)
             }
+        }else{
+            emailError.text = "There was an error"
         }
     }
     

@@ -98,7 +98,7 @@
         <!--LogInVC-->
         <scene sceneID="YQA-iM-iPH">
             <objects>
-                <viewController storyboardIdentifier="LoginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Aan-ea-VN8" userLabel="LogInVC" customClass="LogInVC" customModule="Pocket_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogInVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Aan-ea-VN8" userLabel="LogInVC" customClass="LogInVC" customModule="Pocket_Money" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="guO-Wh-2C2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -12,7 +12,7 @@ class CurrencyVC: UIViewController {
     
     @IBOutlet weak var currencyTableView: UITableView!
     
-    var currencyName = "ILS"
+    var currencyName = "EUR"
     let currencyArray = ["USD","EUR","ILS","AUD", "BRL","CAD","CNY","GBP","HKD","IDR","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","ZAR"]
     
     let db = Firestore.firestore()

@@ -8,7 +8,7 @@
 import Foundation
 
 class FetchCurrencyManager {
-    let baseCoinURL = "https://rest.coinapi.io/v1/exchangerate/ILS"
+    let baseCoinURL = "https://rest.coinapi.io/v1/exchangerate/EURv"
     let apiKey = "75EF3C24-E5DB-4CCC-BA28-47B9DC49B408"
     var rateToPass = Float()
     

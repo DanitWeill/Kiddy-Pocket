@@ -20,7 +20,7 @@ class SubtractVC: UIViewController {
     let db = Firestore.firestore()
     var dateMoneyAdded = String()
     var amountSubtract = Int()
-    var currency = "ILS"
+    var currency = "EUR"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class SubtractVC: UIViewController {
             if let err = err{
                 print(err)
             } else {
-                self.currency = doc?.data()?["currency"] as? String ?? "ILS"
+                self.currency = doc?.data()?["currency"] as? String ?? "EUR"
                 self.currencyLabel.text = self.currency
             }
         }

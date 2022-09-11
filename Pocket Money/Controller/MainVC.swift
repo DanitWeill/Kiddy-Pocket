@@ -16,7 +16,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addFirstKidLabel: UILabel!
     
-    // benny
     
     var kids: [Kid] = []
     
@@ -112,7 +111,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                 print(err.localizedDescription)
             }else{
                 
-                let currency = doc?.data()?["currency"] ?? "ILS"
+                let currency = doc?.data()?["currency"] ?? "EUR"
                 
                 self.currencyName = currency as! String
                 
@@ -275,18 +274,18 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
             if let error = error {
                 print(error)
                 self.db.collection("families").document(uid).setData([
-                    "currency": "ILS"
+                    "currency": "EUR"
                 ])
-                self.currencyName = "ILS"
+                self.currencyName = "EUR"
             }
             
             if document?.exists ?? false {
                 self.currencyName = document?.data()?["currency"] as! String
             } else {
                 self.db.collection("families").document(uid).setData([
-                    "currency": "ILS"
+                    "currency": "EUR"
                 ])
-                self.currencyName = "ILS"
+                self.currencyName = "EUR"
             }
             
             
