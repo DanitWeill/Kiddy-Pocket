@@ -8,7 +8,7 @@
 import Foundation
 
 class FetchCurrencyManager {
-    let baseCoinURL = "https://rest.coinapi.io/v1/exchangerate/EURv"
+    let baseCoinURL = "https://rest.coinapi.io/v1/exchangerate/EUR"
     let apiKey = "75EF3C24-E5DB-4CCC-BA28-47B9DC49B408"
     var rateToPass = Float()
     
@@ -19,7 +19,7 @@ class FetchCurrencyManager {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1 ) {
             
             if self.rateToPass != 0.0 || self.rateToPass != nil {
-                completion(self.rateToPass)
+                completion(1.0)
             }else{
                 completion(1.0)
             }

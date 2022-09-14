@@ -151,8 +151,8 @@
 				844B13F027ABDDD800C440A1 /* UserDetailsVC.swift */,
 				84EC041E281FE58C000E2A82 /* PopUpButtonsVC.swift */,
 				8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */,
-				84A8474327C4D07C007138F0 /* AddByTimeVC.swift */,
 				84606D1928B8CC7300E48989 /* SubtractVC.swift */,
+				84A8474327C4D07C007138F0 /* AddByTimeVC.swift */,
 				847C73F7287306C3004B6365 /* DeleteDataVC.swift */,
 			);
 			path = Controller;

@@ -13,7 +13,6 @@ class UserDetailsCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var amountAddedLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
-    @IBOutlet weak var plusMinusImage: UIImageView!
     
     
     override func awakeFromNib() {
@@ -26,7 +25,6 @@ class UserDetailsCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }

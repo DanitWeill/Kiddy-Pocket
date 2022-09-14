@@ -142,12 +142,15 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                         
                                         if let name = data["name"] as? String, var sum = data["sum"] as? Float  {
                                             
-                                            DateCalculate().dateCalculate(constantAmountToAdd: self.constantAmountToAdd, addEvery: self.addEvery, dateToBegin: self.dateToBegin){ finalAmountRecived in
+                                            DateCalculate().dateCalculate(nameToPass: name, currency: self.currencyName, constantAmountToAdd: self.constantAmountToAdd, addEvery: self.addEvery, dateToBegin: self.dateToBegin){ finalAmountRecived in
                                                 
                                                 self.name = name
                                                 sum = Float(sum) + Float(finalAmountRecived)
+                                                                                                
                                                 
-                                                print("\(sum) +++++++++++++++++++++++++++++")
+                                                // add to database the date from start and the amount the user chose to add
+                                               
+                                                
                                                 
                                                 SumUpdateAfterAmountAdded().sumUpdateAfterAmountAdded(oldSum: sum, amountAdded: Float(finalAmountRecived), uid: uid, kidName: name)
                                                 

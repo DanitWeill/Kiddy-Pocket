@@ -35,7 +35,6 @@ class UserDetailsVC: UIViewController {
     
     let addMoneyToUserVC = AddMoneyToUserVC()
     
-    //    var dateArray: [DateAmount] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +62,6 @@ class UserDetailsVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(dateRecived), name: Notification.Name("dateUpdate"), object: nil)
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(announceSumUpdate), name: Notification.Name("announceSumUpdate"), object: nil)
         
     }
     
@@ -78,9 +76,14 @@ class UserDetailsVC: UIViewController {
             }else{
                 
                 if doc?.data()?["sum"] != nil{
-                    let data = doc?.data()?["sum"] as? Float
-                    let sum = (data ?? 0) * self.rateToPass
-                    self.sumLabel.text = String(format: "%.2f", sum)
+                    if let data = doc?.data()?["sum"] as? Float{
+                        let sum = (data) * self.rateToPass
+                        self.sumLabel.text = String(format: "%.2f", sum)
+                    } else {
+                        print ("error loading sum in user details vc- check there")
+                        print ("XXXXXXXXXXXXXXXXXX")
+
+                    }
                 }
                 
             }
@@ -137,28 +140,16 @@ class UserDetailsVC: UIViewController {
                 
                 self.tableView.reloadData()
                 
+                print("=======================================")
+                print (   self.arrayOfDate,
+                          self.arrayOfAmount,
+                          self.arrayOfCurrency)
             }
         }
     }
     
     @objc func sumUpdateRecived(){
-        
         importData()
-        
-//        guard let uid = Auth.auth().currentUser?.uid else {return}
-//
-//        db.collection("families").document(uid).collection("kids").document(kidsStringToPass[kidsIndex].name).getDocument { doc, err in
-//            if let err = err{
-//                print(err.localizedDescription)
-//            }else{
-//
-//                if doc?.data()?["sum"] != nil{
-//                    let data = doc?.data()?["sum"] as? Float
-//                    let sum = (data ?? 0) * self.rateToPass
-//                    self.sumLabel.text = String(format: "%.2f", sum)
-//                }
-//            }
-//        }
     }
     
 
@@ -168,9 +159,6 @@ class UserDetailsVC: UIViewController {
     }
     
     
-    @objc func announceSumUpdate(){
-        
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let popUpButtonsVC = segue.destination as? PopUpButtonsVC {

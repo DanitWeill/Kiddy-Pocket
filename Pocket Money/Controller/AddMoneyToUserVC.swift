@@ -106,7 +106,6 @@ class AddMoneyToUserVC: UIViewController {
                     formatter.timeZone = .current
                     formatter.locale = .current
                     formatter.dateFormat = "MMM d, yyyy"
-                    //                dd.MM.yyyy   HH:mm
                     self.dateMoneyAdded = formatter.string(from: date)
                     
                     //set new collection "history"

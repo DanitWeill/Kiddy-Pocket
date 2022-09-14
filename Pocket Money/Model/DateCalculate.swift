@@ -17,11 +17,13 @@ class DateCalculate{
     var timesToAdd = 0
     var finalAmountOfMoneyToAdd = 0
     
-    func dateCalculate(constantAmountToAdd: Int, addEvery: Int, dateToBegin: TimeInterval, completion: @escaping (Int) -> Void) {
+    func dateCalculate(nameToPass: String, currency: String, constantAmountToAdd: Int, addEvery: Int, dateToBegin: TimeInterval, completion: @escaping (Int) -> Void) {
         
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        var distance = Int()
+        var constantDateArray: [ConstantDateArray] = []
+        var dateToWriteString: String = ""
         
-        let uid = Auth.auth().currentUser?.uid
-      
         // Calculate how often to add money
         let now = self.date.timeIntervalSince1970
         
@@ -33,7 +35,7 @@ class DateCalculate{
             
         } else if now > dateToBegin {
             
-            let distance = Int((now - dateToBegin) / 86400)
+            distance = Int((now - dateToBegin) / 86400)
             
             if distance >= addEvery{
                 
@@ -44,14 +46,64 @@ class DateCalculate{
                 }else{
                     numOfAdds = Int(distance / addEvery)
                 }
-               
+                
                 
                 self.finalAmountOfMoneyToAdd = numOfAdds * constantAmountToAdd
-        
+                
             }
+            // add to database the date from start and the amount the user chose to add
+            
+            if addEvery != 0 {
+                let howManyAddEvery = Int(distance / addEvery)
+                
+                if howManyAddEvery > 0 {
+                    
+                    for i in 1...howManyAddEvery{
+                        
+                        let dateToWrite =  TimeInterval(Int(dateToBegin) + (i * addEvery * 86400))
+                        let dateToWrite2 = NSDate(timeIntervalSince1970: dateToWrite)
+                        
+                        let date = Date()
+                        let formatter = DateFormatter()
+                        formatter.timeZone = .current
+                        formatter.locale = .current
+                        formatter.dateFormat = "MMM d, yyyy"
+                        var dateToWriteString = formatter.string(from: dateToWrite2 as Date)
+                        
+                        print("=================")
+                        print(dateToWriteString)
+
+                        db.collection("families").document(uid).collection("kids").document(nameToPass).collection("history").addDocument(data: [
+                            "date money added": dateToWriteString,
+                            "amount added": constantAmountToAdd,
+                            "date": dateToWrite,
+                            "currency": currency
+                        ]) { err in
+                            if let err = err {
+                                print("Error writing document: \(err)")
+                            } else {
+                                print("Document successfully written!")
+                            }
+                        }
+                        
+//                        let newDate = ConstantDateArray(dateToWrite: dateToWriteString, constantAmountToAdd: constantAmountToAdd, currency: currency)
+//                        constantDateArray.append(newDate)
+//
+//                        print(constantDateArray)
+//
+                    }
+                }
+            }
+            
         }
         completion(finalAmountOfMoneyToAdd)
+        
+        
     }
 }
-        
 
+struct ConstantDateArray {
+    let dateToWrite: String
+    let constantAmountToAdd: Int
+    let currency: String
+}

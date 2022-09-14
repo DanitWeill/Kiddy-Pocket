@@ -40,11 +40,11 @@ class AddByTimeVC: UIViewController {
     var nameToPass: String = ""
     var currentWeekday: Int = 1
     var daysToAdd = 0
-    let addOneDay = Date.now.addingTimeInterval(86400)
-    let addTwoDays = Date.now.addingTimeInterval(172800)
-    let addTreeDays = Date.now.addingTimeInterval(259200)
-    let addFourDays = Date.now.addingTimeInterval(345600)
-    let addFiveDays = Date.now.addingTimeInterval(432000)
+//    let addOneDay = Date.now.addingTimeInterval(86400)
+//    let addTwoDays = Date.now.addingTimeInterval(172800)
+//    let addTreeDays = Date.now.addingTimeInterval(259200)
+//    let addFourDays = Date.now.addingTimeInterval(345600)
+//    let addFiveDays = Date.now.addingTimeInterval(432000)
     
     
     override func viewDidLoad() {
@@ -349,27 +349,7 @@ class AddByTimeVC: UIViewController {
             dateToBeginString = formatter.string(from: dateToBeginDate)
             
            
-            guard let uid = Auth.auth().currentUser?.uid else {return}
-
-            db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
-                "constant_amount_to_add": Int(constantAmountToAddTextfield.text ?? "0"),
-                "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400),
-                "add_every": addEvery
-            ]){ err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                    //what will happen if the name and sum are nil
-                } else {
-                    print("setConstantAmountToAdd successfully written!")
-                    print(self.constantAmountToAddTextfield.text)
-                }
-            }
-            print("tapped")
-            view.endEditing(true)
-            showToast(message: "Saved!", font: .systemFont(ofSize: 12.0))
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.dismiss(animated: true)
-                }
+          
             }else{
                 //if amount is empty
                 showToast(message: "please fill amount", font: .systemFont(ofSize: 12.0))
@@ -377,6 +357,9 @@ class AddByTimeVC: UIViewController {
             }
         }else{
             //if swicher is off
+            
+            constantAmountToAddTextfield.text = ""
+            
             guard let uid = Auth.auth().currentUser?.uid else {return}
 
             db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
@@ -397,6 +380,32 @@ class AddByTimeVC: UIViewController {
         }
       
      
+    }
+    
+    @IBAction func saveChangesButtonPressed(_ sender: UIButton) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let date = Date()
+
+        db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
+            "constant_amount_to_add": Int(constantAmountToAddTextfield.text ?? "0"),
+            "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400),
+            "add_every": addEvery
+        ]){ err in
+            if let err = err {
+                print("Error writing document: \(err)")
+                //what will happen if the name and sum are nil
+            } else {
+                print("setConstantAmountToAdd successfully written!")
+                print(self.constantAmountToAddTextfield.text)
+            }
+        }
+        print("tapped")
+        view.endEditing(true)
+        showToast(message: "Saved!", font: .systemFont(ofSize: 12.0))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.dismiss(animated: true)
+            }
+        
     }
     
 }
