@@ -19,9 +19,7 @@ class SumUpdateAfterAmountAdded{
             if let error = error{
                 print(error.localizedDescription)
             }
-            let swicherOnOff = docs?.data()?["swicherOnOff"] as? Bool
-            
-            if swicherOnOff == true {
+          
                 Firestore.firestore().collection("families").document(uid).collection("kids").document(kidName).setData([
 //                    "sum" : oldSum + amountAdded,
                     "date_to_begin" : self.date.timeIntervalSince1970], merge: true)
@@ -72,7 +70,7 @@ class SumUpdateAfterAmountAdded{
                         print("================ final sum")
                     }
                 }
-            }
+            
         }
         
        
