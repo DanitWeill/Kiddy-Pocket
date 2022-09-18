@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842A233728D1DCB500C576C7 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A233628D1DCB500C576C7 /* ForgotPasswordVC.swift */; };
 		844B13A627A91E0400C440A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A527A91E0400C440A1 /* AppDelegate.swift */; };
 		844B13A827A91E0400C440A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A727A91E0400C440A1 /* SceneDelegate.swift */; };
 		844B13AA27A91E0400C440A1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B13A927A91E0400C440A1 /* Home.swift */; };
@@ -25,7 +26,7 @@
 		847C73F8287306C3004B6365 /* DeleteDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C73F7287306C3004B6365 /* DeleteDataVC.swift */; };
 		847FE809286C89FC00F2C026 /* SumUpdateAfterAmountAdded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FE808286C89FC00F2C026 /* SumUpdateAfterAmountAdded.swift */; };
 		848494BB27DA3BAF004543DE /* DateCalculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848494BA27DA3BAF004543DE /* DateCalculate.swift */; };
-		8485204727AFE4BE00E483ED /* AddMoneyToUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */; };
+		8485204727AFE4BE00E483ED /* AddMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485204627AFE4BE00E483ED /* AddMoneyVC.swift */; };
 		84A8474427C4D07C007138F0 /* AddByTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A8474327C4D07C007138F0 /* AddByTimeVC.swift */; };
 		84ADF7A42825775200DB0591 /* FetchCurrencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ADF7A32825775200DB0591 /* FetchCurrencyManager.swift */; };
 		84ADF7A62826F0BC00DB0591 /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ADF7A52826F0BC00DB0591 /* CurrencyData.swift */; };
@@ -44,6 +45,7 @@
 		12D68ECCF63200101F7B20D4 /* Pods_Pocket_Money.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pocket_Money.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		250254A8FF20916B9E1A68DC /* Pods-Pocket Money.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pocket Money.release.xcconfig"; path = "Target Support Files/Pods-Pocket Money/Pods-Pocket Money.release.xcconfig"; sourceTree = "<group>"; };
 		3BEBDF27D7B93F07186AA918 /* Pods-Pocket Money.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pocket Money.debug.xcconfig"; path = "Target Support Files/Pods-Pocket Money/Pods-Pocket Money.debug.xcconfig"; sourceTree = "<group>"; };
+		842A233628D1DCB500C576C7 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		844B13A527A91E0400C440A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		844B13A727A91E0400C440A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		844B13A927A91E0400C440A1 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -63,7 +65,7 @@
 		847C73F7287306C3004B6365 /* DeleteDataVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDataVC.swift; sourceTree = "<group>"; };
 		847FE808286C89FC00F2C026 /* SumUpdateAfterAmountAdded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumUpdateAfterAmountAdded.swift; sourceTree = "<group>"; };
 		848494BA27DA3BAF004543DE /* DateCalculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculate.swift; sourceTree = "<group>"; };
-		8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyToUserVC.swift; sourceTree = "<group>"; };
+		8485204627AFE4BE00E483ED /* AddMoneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyVC.swift; sourceTree = "<group>"; };
 		84A8474327C4D07C007138F0 /* AddByTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddByTimeVC.swift; sourceTree = "<group>"; };
 		84A8474527C563CE007138F0 /* Pocket Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Money.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84ADF7A32825775200DB0591 /* FetchCurrencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCurrencyManager.swift; sourceTree = "<group>"; };
@@ -145,12 +147,13 @@
 				844B13A927A91E0400C440A1 /* Home.swift */,
 				844B13E127A929A600C440A1 /* SignUpVC.swift */,
 				844B13E327A9378800C440A1 /* LogInVC.swift */,
+				842A233628D1DCB500C576C7 /* ForgotPasswordVC.swift */,
 				844B13E527A93DF300C440A1 /* MainVC.swift */,
 				84ADF7A72827C48700DB0591 /* CurrencyVC.swift */,
 				84C616D627BE365400952350 /* AddUserVC.swift */,
 				844B13F027ABDDD800C440A1 /* UserDetailsVC.swift */,
 				84EC041E281FE58C000E2A82 /* PopUpButtonsVC.swift */,
-				8485204627AFE4BE00E483ED /* AddMoneyToUserVC.swift */,
+				8485204627AFE4BE00E483ED /* AddMoneyVC.swift */,
 				84606D1928B8CC7300E48989 /* SubtractVC.swift */,
 				84A8474327C4D07C007138F0 /* AddByTimeVC.swift */,
 				847C73F7287306C3004B6365 /* DeleteDataVC.swift */,
@@ -316,11 +319,12 @@
 				84C616D227B90B2700952350 /* UserDetailsCell.swift in Sources */,
 				848494BB27DA3BAF004543DE /* DateCalculate.swift in Sources */,
 				844B13E627A93DF300C440A1 /* MainVC.swift in Sources */,
+				842A233728D1DCB500C576C7 /* ForgotPasswordVC.swift in Sources */,
 				84C616D727BE365400952350 /* AddUserVC.swift in Sources */,
 				84A8474427C4D07C007138F0 /* AddByTimeVC.swift in Sources */,
 				84C616D527B9185A00952350 /* DateHistoryArray.swift in Sources */,
 				84F0F53428B4D93F00CDC5D8 /* LaunchAnimationVC.swift in Sources */,
-				8485204727AFE4BE00E483ED /* AddMoneyToUserVC.swift in Sources */,
+				8485204727AFE4BE00E483ED /* AddMoneyVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

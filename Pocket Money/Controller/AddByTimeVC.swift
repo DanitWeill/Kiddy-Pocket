@@ -40,16 +40,76 @@ class AddByTimeVC: UIViewController {
     var nameToPass: String = ""
     var currentWeekday: Int = 1
     var daysToAdd = 0
-//    let addOneDay = Date.now.addingTimeInterval(86400)
-//    let addTwoDays = Date.now.addingTimeInterval(172800)
-//    let addTreeDays = Date.now.addingTimeInterval(259200)
-//    let addFourDays = Date.now.addingTimeInterval(345600)
-//    let addFiveDays = Date.now.addingTimeInterval(432000)
-    
+    var weekDayToBegin = Int()
+    var swicherOnOff = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        swicher.isOn = false
+
+        let date = Date()
+        let calendar = Calendar.current
+        currentWeekday = calendar.component(.weekday, from: date)
+
+        // upload the data the user determined- read from db
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        db.collection("families").document(uid).collection("kids").document(nameToPass).getDocument(completion: { doc, error in
+            if let error = error{
+                print(error)
+            }
+            print("=======================")
+
+            let constantAmountToAdd = doc?["constant_amount_to_add"] as! Int
+            let addEvery = doc?.data()?["add_every"] as? Int
+            let weekDayToBegin = doc?.data()?["week_day_to_begin"] as? Int
+            self.swicherOnOff = doc?.data()?["swicherOnOff"] as? Bool ?? false
+
+            self.constantAmountToAddTextfield.text = String(constantAmountToAdd)
+            
+            if addEvery == 0 {
+                self.dayButton.isSelected = false
+                self.weekButton.isSelected = false
+                self.monthButton.isSelected = false
+                self.yearButton.isSelected = false
+           } else if addEvery == 1 {
+                self.dayButton.isSelected = true
+            } else if addEvery == 7 {
+                self.weekButton.isSelected = true
+            } else if addEvery == 30 {
+                self.monthButton.isSelected = true
+            } else {
+                self.yearButton.isSelected = true
+            }
+            
+            if weekDayToBegin == 0 {
+                self.sunButton.isSelected = false
+                self.monButton.isSelected = false
+                self.tueButton.isSelected = false
+                self.wedButton.isSelected = false
+                self.thuButton.isSelected = false
+                self.friButton.isSelected = false
+                self.satButton.isSelected = false
+            } else if weekDayToBegin == 1 {
+                self.sunButton.isSelected = true
+            } else if weekDayToBegin == 2 {
+                self.monButton.isSelected = true
+            } else if weekDayToBegin == 3 {
+                self.tueButton.isSelected = true
+            } else if weekDayToBegin == 4 {
+                self.wedButton.isSelected = true
+            } else if weekDayToBegin == 5 {
+                self.thuButton.isSelected = true
+            } else if weekDayToBegin == 6 {
+                self.friButton.isSelected = true
+            } else if weekDayToBegin == 7 {
+                self.satButton.isSelected = true
+            }
+            
+            if self.swicherOnOff == true {
+                self.swicher.isOn = true
+            }else{
+                self.swicher.isOn = false
+            }
+        })
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
       
@@ -79,7 +139,7 @@ class AddByTimeVC: UIViewController {
             satButton.isSelected = false
             satButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             
-            
+            weekDayToBegin = 1
             if currentWeekday > 1 {
                 daysToAdd = (7 - currentWeekday) + 1
             }else if currentWeekday < 1{
@@ -108,7 +168,8 @@ class AddByTimeVC: UIViewController {
             satButton.isSelected = false
             satButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             
-            
+            weekDayToBegin = 2
+
             if currentWeekday > 2 {
                 daysToAdd = (7 - currentWeekday) + 2
             }else if currentWeekday < 2{
@@ -136,6 +197,8 @@ class AddByTimeVC: UIViewController {
             satButton.isSelected = false
             satButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             
+            weekDayToBegin = 3
+
             if currentWeekday > 3 {
                 daysToAdd = (7 - currentWeekday) + 3
             }else if currentWeekday < 3{
@@ -163,6 +226,8 @@ class AddByTimeVC: UIViewController {
             satButton.isSelected = false
             satButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             
+            weekDayToBegin = 4
+
             if currentWeekday > 4 {
                 daysToAdd = (7 - currentWeekday) + 4
             }else if currentWeekday < 4{
@@ -190,7 +255,8 @@ class AddByTimeVC: UIViewController {
             satButton.isSelected = false
             satButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             
-            
+            weekDayToBegin = 5
+
             if currentWeekday > 5 {
                 daysToAdd = (7 - currentWeekday) + 5
             }else if currentWeekday < 5{
@@ -218,7 +284,8 @@ class AddByTimeVC: UIViewController {
             satButton.isSelected = false
             satButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             
-            
+            weekDayToBegin = 6
+
             if currentWeekday > 6 {
                 daysToAdd = (7 - currentWeekday) + 6
             }else if currentWeekday < 6{
@@ -246,7 +313,8 @@ class AddByTimeVC: UIViewController {
             friButton.isSelected = false
             friButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             
-            
+            weekDayToBegin = 7
+
             if currentWeekday > 7 {
                 daysToAdd = (7 - currentWeekday) + 7
             }else if currentWeekday < 7{
@@ -263,16 +331,6 @@ class AddByTimeVC: UIViewController {
         if dayButton.isSelected == false {
             dayButton.isSelected = true
             dayButton.backgroundColor = UIColor.gray
-            
-            //            add 86400 (sec in 1 day)
-            //            let addOneDay = dateToBeginDate.addingTimeInterval(86400)
-            
-            let addOneDay = dateToBeginDate.addingTimeInterval(86400)
-            
-            
-            print(addOneDay)
-            print("================")
-            
             
             weekButton.isSelected = false
             weekButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
@@ -317,46 +375,51 @@ class AddByTimeVC: UIViewController {
         }
     }
     
-    @IBAction func yearButton(_ sender: UIButton) {
-        if yearButton.isSelected == false {
-            yearButton.isSelected = true
-            yearButton.backgroundColor = UIColor.gray
-            dayButton.isSelected = false
-            dayButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
-            weekButton.isSelected = false
-            weekButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
-            monthButton.isSelected = false
-            monthButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
-            
-            addEvery = 365
+    
+    @IBAction func swicher(_ sender: UISwitch) {
+        if sender.isOn{
+            swicherOnOff = true
+            if constantAmountToAddTextfield.text == "" || constantAmountToAddTextfield.text == "0"{
+                //if amount is empty
+                showToast(message: "please fill amount", font: .systemFont(ofSize: 12.0))
+                swicher.isOn = false
+                print("===========++++++++++")
+            }
+        }else{
+            //if swicher is off
+            swicherOnOff = false
             
         }
     }
     
-    
-    
-    @IBAction func swicher(_ sender: UISwitch) {
-        if sender.isOn{
-            if constantAmountToAddTextfield.text != ""{
-            let date = Date()
-            let calendar = Calendar.current
-            currentWeekday = calendar.component(.weekday, from: date)
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d, yyyy  at  HH:mm"
-            
-            
-            dateToBeginDate = date.addingTimeInterval(TimeInterval(daysToAdd * 86400))
-            dateToBeginString = formatter.string(from: dateToBeginDate)
-            
-           
+    @IBAction func saveChangesButtonPressed(_ sender: UIButton) {
+        if swicherOnOff == true {
+
+                guard let uid = Auth.auth().currentUser?.uid else {return}
+                let date = Date()
+                
+                db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
+                    "constant_amount_to_add": Int(constantAmountToAddTextfield.text ?? "0"),
+                    "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400),
+                    "add_every": addEvery,
+                    "week_day_to_begin": weekDayToBegin,
+                    "swicherOnOff": swicherOnOff
+                ]){ err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("setConstantAmountToAdd successfully written!")
+                        print(self.constantAmountToAddTextfield.text)
+                    }
+                }
           
-            }else{
-                //if amount is empty
-                showToast(message: "please fill amount", font: .systemFont(ofSize: 12.0))
-                swicher.isOn = false
-            }
-        }else{
-            //if swicher is off
+            
+            showToast(message: "Saved!", font: .systemFont(ofSize: 12.0))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.dismiss(animated: true)
+                }
+        } else {
+            // if swicher is off
             
             constantAmountToAddTextfield.text = ""
             
@@ -377,34 +440,12 @@ class AddByTimeVC: UIViewController {
             }
             showToast(message: "Not Saved", font: .systemFont(ofSize: 12.0))
             
+            
         }
-      
-     
-    }
-    
-    @IBAction func saveChangesButtonPressed(_ sender: UIButton) {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        let date = Date()
-
-        db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
-            "constant_amount_to_add": Int(constantAmountToAddTextfield.text ?? "0"),
-            "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400),
-            "add_every": addEvery
-        ]){ err in
-            if let err = err {
-                print("Error writing document: \(err)")
-                //what will happen if the name and sum are nil
-            } else {
-                print("setConstantAmountToAdd successfully written!")
-                print(self.constantAmountToAddTextfield.text)
-            }
-        }
+        
         print("tapped")
         view.endEditing(true)
-        showToast(message: "Saved!", font: .systemFont(ofSize: 12.0))
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.dismiss(animated: true)
-            }
+     
         
     }
     

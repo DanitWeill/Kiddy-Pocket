@@ -152,8 +152,10 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                
                                                 
                                                 
-                                                SumUpdateAfterAmountAdded().sumUpdateAfterAmountAdded(oldSum: sum, amountAdded: Float(finalAmountRecived), uid: uid, kidName: name)
+                                                SumUpdateAfterAmountAdded().sumUpdateAfterAmountAdded(amountAdded: Float(finalAmountRecived), uid: uid, kidName: name){finalSumRecived in
                                                 
+                                                    sum = finalSumRecived
+                                                    
                                                 // grab from db the cell color & picture
                                                 if document.data()["cellColor"] as? String != nil {
                                                     let colorHexString = document.data()["cellColor"] as! String
@@ -195,7 +197,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                         
                                                         self.kids.append(newUser)
                                                         self.reloadData()
-                                                        
+                                                    }
                                                     }
                                                 }
                                             }

@@ -33,7 +33,7 @@ class UserDetailsVC: UIViewController {
     
     
     
-    let addMoneyToUserVC = AddMoneyToUserVC()
+    let addMoneyVC = AddMoneyVC()
     
     
     override func viewDidLoad() {
@@ -140,10 +140,7 @@ class UserDetailsVC: UIViewController {
                 
                 self.tableView.reloadData()
                 
-                print("=======================================")
-                print (   self.arrayOfDate,
-                          self.arrayOfAmount,
-                          self.arrayOfCurrency)
+               
             }
         }
     }

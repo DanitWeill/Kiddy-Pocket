@@ -68,9 +68,7 @@ class LogInVC: UIViewController {
     
     @IBAction func forgotPasswordButtonPressed(_ sender: UIButton) {
         
-        Auth.auth().sendPasswordReset(withEmail: self.usernameTextField.text ?? "") { error in
-            // Your code here
-        }
+        performSegue(withIdentifier: "goToForgotPassword", sender: self)
     }
 }
 

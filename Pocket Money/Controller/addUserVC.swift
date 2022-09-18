@@ -178,8 +178,10 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
             { err in
                 if let err = err {
                     print("Error writing document: \(err)")
+
                 } else {
                     print("Document successfully written!")
+
                     MainVC().kids = []
                     
                     NotificationCenter.default.post(name: Notification.Name("newUserUpdate"), object: nil)

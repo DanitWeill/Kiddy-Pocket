@@ -1,5 +1,5 @@
 //
-//  AddMoneyToUserVC.swift
+//  AddMoneyVC.swift
 //  Pocket Money
 //
 //  Created by Danit on 06/02/2022.
@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class AddMoneyToUserVC: UIViewController {
+class AddMoneyVC: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountTextField: UITextField!
@@ -169,7 +169,7 @@ class AddMoneyToUserVC: UIViewController {
     
 }
 
-extension AddMoneyToUserVC {
+extension AddMoneyVC {
     
     func showToast(message : String, font: UIFont) {
         

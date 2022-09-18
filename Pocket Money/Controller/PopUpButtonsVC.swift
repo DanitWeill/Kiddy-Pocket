@@ -46,7 +46,7 @@ class PopUpButtonsVC: UIViewController {
     
     
     @IBAction func addMoney(_ sender: UIButton) {
-        performSegue(withIdentifier: "goToAddMoneyToUserVC", sender: self)
+        performSegue(withIdentifier: "goToAddMoneyVC", sender: self)
     }
     
     
@@ -65,9 +65,9 @@ class PopUpButtonsVC: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let addMoneyToUserVC = segue.destination as? AddMoneyToUserVC {
-            addMoneyToUserVC.nameToPass = nameToPass
-            addMoneyToUserVC.rateToPass = rateToPass
+        if let addMoneyVC = segue.destination as? AddMoneyVC {
+            addMoneyVC.nameToPass = nameToPass
+            addMoneyVC.rateToPass = rateToPass
 
         }
         if let addByTimeVC = segue.destination as? AddByTimeVC {

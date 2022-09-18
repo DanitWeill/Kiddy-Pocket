@@ -53,6 +53,8 @@ class DateCalculate{
             }
             // add to database the date from start and the amount the user chose to add
             
+            
+            
             if addEvery != 0 {
                 let howManyAddEvery = Int(distance / addEvery)
                 
@@ -72,8 +74,8 @@ class DateCalculate{
                         
                         print("=================")
                         print(dateToWriteString)
-
-                        db.collection("families").document(uid).collection("kids").document(nameToPass).collection("history").addDocument(data: [
+                        
+                        self.db.collection("families").document(uid).collection("kids").document(nameToPass).collection("history").addDocument(data: [
                             "date money added": dateToWriteString,
                             "amount added": constantAmountToAdd,
                             "date": dateToWrite,
@@ -86,17 +88,13 @@ class DateCalculate{
                             }
                         }
                         
-//                        let newDate = ConstantDateArray(dateToWrite: dateToWriteString, constantAmountToAdd: constantAmountToAdd, currency: currency)
-//                        constantDateArray.append(newDate)
-//
-//                        print(constantDateArray)
-//
                     }
                 }
             }
-            
         }
-        completion(finalAmountOfMoneyToAdd)
+      
+        
+        completion(self.finalAmountOfMoneyToAdd)
         
         
     }
