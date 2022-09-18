@@ -19,7 +19,7 @@ class FetchCurrencyManager {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1 ) {
             
             if self.rateToPass != 0.0 || self.rateToPass != nil {
-                completion(1.0)
+                completion(self.rateToPass)
             }else{
                 completion(1.0)
             }

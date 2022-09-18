@@ -1264,7 +1264,7 @@
                                         <color key="backgroundColor" red="0.96841138599999999" green="0.67247221840000004" blue="0.28991965479999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Dayly"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Daily"/>
                                         <connections>
                                             <action selector="dayButton:" destination="S5t-DL-AYM" eventType="touchUpInside" id="kFd-C9-LbZ"/>
                                         </connections>
@@ -1328,6 +1328,12 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbL-dc-o4j">
+                                <rect key="frame" x="186.5" y="481" width="41.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uNF-hC-otg"/>
                         <color key="backgroundColor" red="0.98721724749999995" green="0.93062049150000004" blue="0.45869737859999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1337,6 +1343,7 @@
                             <constraint firstItem="eks-NT-Sx5" firstAttribute="top" secondItem="b0b-HB-exD" secondAttribute="bottom" constant="30" id="6CE-Qp-ln2"/>
                             <constraint firstAttribute="bottom" secondItem="D59-2r-36X" secondAttribute="bottom" id="8ab-ja-abK"/>
                             <constraint firstItem="yDa-VT-fHc" firstAttribute="centerX" secondItem="2Gs-wU-Hym" secondAttribute="centerX" id="9c2-Ed-QIv"/>
+                            <constraint firstItem="b0b-HB-exD" firstAttribute="top" secondItem="LbL-dc-o4j" secondAttribute="bottom" constant="8" id="AWn-ZZ-CX6"/>
                             <constraint firstItem="77u-3f-1od" firstAttribute="top" secondItem="hUj-9N-vmB" secondAttribute="bottom" constant="30" id="Bcg-HS-Bpv"/>
                             <constraint firstItem="uNF-hC-otg" firstAttribute="trailing" secondItem="D59-2r-36X" secondAttribute="trailing" id="DSk-uC-HKS"/>
                             <constraint firstItem="hUj-9N-vmB" firstAttribute="centerX" secondItem="2Gs-wU-Hym" secondAttribute="centerX" id="F1X-fJ-cgP"/>
@@ -1344,6 +1351,7 @@
                             <constraint firstItem="b0b-HB-exD" firstAttribute="top" secondItem="Rzf-CH-7QZ" secondAttribute="bottom" constant="60" id="GVk-2y-bBW"/>
                             <constraint firstItem="uNF-hC-otg" firstAttribute="trailing" secondItem="Rzf-CH-7QZ" secondAttribute="trailing" constant="5" id="HqJ-Bf-OmO"/>
                             <constraint firstItem="hUj-9N-vmB" firstAttribute="top" secondItem="yDa-VT-fHc" secondAttribute="bottom" constant="10" id="Iyk-eW-vV9"/>
+                            <constraint firstItem="LbL-dc-o4j" firstAttribute="centerX" secondItem="2Gs-wU-Hym" secondAttribute="centerX" id="OYZ-SA-SX1"/>
                             <constraint firstItem="D59-2r-36X" firstAttribute="top" secondItem="2Gs-wU-Hym" secondAttribute="top" id="QbR-u5-c40"/>
                             <constraint firstItem="ZWJ-k6-BSM" firstAttribute="top" secondItem="JMZ-M3-83D" secondAttribute="bottom" constant="30" id="Qii-G1-aPd"/>
                             <constraint firstItem="DP4-BE-mKa" firstAttribute="top" secondItem="uNF-hC-otg" secondAttribute="top" constant="50" id="Tc7-dy-nkM"/>
@@ -1369,6 +1377,7 @@
                         <outlet property="satButton" destination="504-Uk-0eV" id="3JG-V7-40w"/>
                         <outlet property="sunButton" destination="zng-Ug-nWc" id="5aa-hA-Qgg"/>
                         <outlet property="swicher" destination="b0b-HB-exD" id="YmT-E2-DgN"/>
+                        <outlet property="swicherLabel" destination="LbL-dc-o4j" id="unh-xo-Jc8"/>
                         <outlet property="thuButton" destination="Tiw-11-tYD" id="63m-at-amE"/>
                         <outlet property="tueButton" destination="MXe-BN-ANM" id="yME-VW-vke"/>
                         <outlet property="wedButton" destination="YAa-xa-grt" id="2QC-tZ-W94"/>

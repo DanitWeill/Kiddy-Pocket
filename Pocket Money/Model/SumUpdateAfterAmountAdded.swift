@@ -21,7 +21,6 @@ class SumUpdateAfterAmountAdded{
             }
           
                 Firestore.firestore().collection("families").document(uid).collection("kids").document(kidName).setData([
-//                    "sum" : oldSum + amountAdded,
                     "date_to_begin" : self.date.timeIntervalSince1970], merge: true)
                 
                 
@@ -58,16 +57,11 @@ class SumUpdateAfterAmountAdded{
                 }) { (object, error) in
                     if let error = error {
                         print("Transaction failed: \(error)")
-                        print("sum transaction un date calculate +++++++++++++++++++++++++++++++")
                         completion(self.finalSum)
-                        print(self.finalSum)
-                        print("================ final sum")
                     } else {
                         print("Transaction successfully committed!")
-                        print("sum transaction un date calculate +++++++++++++++++++++++++++++++")
                         completion(self.finalSum)
-                        print(self.finalSum)
-                        print("================ final sum")
+                      
                     }
                 }
             

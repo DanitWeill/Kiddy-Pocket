@@ -15,6 +15,7 @@ class AddByTimeVC: UIViewController {
     @IBOutlet weak var constantAmountToAddTextfield: UITextField!
     @IBOutlet weak var swicher: UISwitch!
     
+    @IBOutlet weak var swicherLabel: UILabel!
     
     @IBOutlet weak var sunButton: UIButton!
     @IBOutlet weak var monButton: UIButton!
@@ -27,7 +28,7 @@ class AddByTimeVC: UIViewController {
     @IBOutlet weak var dayButton: UIButton!
     @IBOutlet weak var weekButton: UIButton!
     @IBOutlet weak var monthButton: UIButton!
-    @IBOutlet weak var yearButton: UIButton!
+    
     
     
     
@@ -58,9 +59,9 @@ class AddByTimeVC: UIViewController {
             }
             print("=======================")
 
-            let constantAmountToAdd = doc?["constant_amount_to_add"] as! Int
-            let addEvery = doc?.data()?["add_every"] as? Int
-            let weekDayToBegin = doc?.data()?["week_day_to_begin"] as? Int
+            let constantAmountToAdd = doc?["constant_amount_to_add"] as? Int ?? 0
+            let addEvery = doc?.data()?["add_every"] as? Int ?? 0
+            let weekDayToBegin = doc?.data()?["week_day_to_begin"] as? Int ?? 0
             self.swicherOnOff = doc?.data()?["swicherOnOff"] as? Bool ?? false
 
             self.constantAmountToAddTextfield.text = String(constantAmountToAdd)
@@ -69,15 +70,15 @@ class AddByTimeVC: UIViewController {
                 self.dayButton.isSelected = false
                 self.weekButton.isSelected = false
                 self.monthButton.isSelected = false
-                self.yearButton.isSelected = false
            } else if addEvery == 1 {
                 self.dayButton.isSelected = true
+                self.addEvery = 1
             } else if addEvery == 7 {
                 self.weekButton.isSelected = true
+                self.addEvery = 7
             } else if addEvery == 30 {
                 self.monthButton.isSelected = true
-            } else {
-                self.yearButton.isSelected = true
+                self.addEvery = 30
             }
             
             if weekDayToBegin == 0 {
@@ -90,24 +91,35 @@ class AddByTimeVC: UIViewController {
                 self.satButton.isSelected = false
             } else if weekDayToBegin == 1 {
                 self.sunButton.isSelected = true
+                self.weekDayToBegin = 1
             } else if weekDayToBegin == 2 {
                 self.monButton.isSelected = true
+                self.weekDayToBegin = 2
             } else if weekDayToBegin == 3 {
                 self.tueButton.isSelected = true
+                self.weekDayToBegin = 3
             } else if weekDayToBegin == 4 {
                 self.wedButton.isSelected = true
+                self.weekDayToBegin = 4
             } else if weekDayToBegin == 5 {
                 self.thuButton.isSelected = true
+                self.weekDayToBegin = 5
             } else if weekDayToBegin == 6 {
                 self.friButton.isSelected = true
+                self.weekDayToBegin = 6
             } else if weekDayToBegin == 7 {
                 self.satButton.isSelected = true
+                self.weekDayToBegin = 7
             }
             
             if self.swicherOnOff == true {
                 self.swicher.isOn = true
+                self.swicherLabel.text = "Active"
+
             }else{
                 self.swicher.isOn = false
+                self.swicherLabel.text = "Not Active"
+
             }
         })
         
@@ -336,8 +348,6 @@ class AddByTimeVC: UIViewController {
             weekButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             monthButton.isSelected = false
             monthButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
-            yearButton.isSelected = false
-            yearButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             
             addEvery = 1
         }
@@ -351,9 +361,7 @@ class AddByTimeVC: UIViewController {
             dayButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             monthButton.isSelected = false
             monthButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
-            yearButton.isSelected = false
-            yearButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
-            
+
             addEvery = 7
             
         }
@@ -367,8 +375,6 @@ class AddByTimeVC: UIViewController {
             dayButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             weekButton.isSelected = false
             weekButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
-            yearButton.isSelected = false
-            yearButton.backgroundColor = #colorLiteral(red: 1, green: 0.656021297, blue: 0.1703382134, alpha: 1)
             
             addEvery = 30
             
@@ -379,15 +385,25 @@ class AddByTimeVC: UIViewController {
     @IBAction func swicher(_ sender: UISwitch) {
         if sender.isOn{
             swicherOnOff = true
-            if constantAmountToAddTextfield.text == "" || constantAmountToAddTextfield.text == "0"{
-                //if amount is empty
-                showToast(message: "please fill amount", font: .systemFont(ofSize: 12.0))
+            swicherLabel.text = "Active"
+            if weekDayToBegin == 0 {
+                showToast(message: "Please choose day to start adding", font: .systemFont(ofSize: 12.0))
                 swicher.isOn = false
-                print("===========++++++++++")
+            }
+            if addEvery == 0 {
+                showToast(message: "Please choose how often to add", font: .systemFont(ofSize: 12.0))
+                swicher.isOn = false
+            }
+            if constantAmountToAddTextfield.text == "" || constantAmountToAddTextfield.text == "0" {
+                //if amount is empty
+                showToast(message: "Please fill amount", font: .systemFont(ofSize: 12.0))
+                swicher.isOn = false
             }
         }else{
             //if swicher is off
             swicherOnOff = false
+            swicherLabel.text = "Not Active"
+
             
         }
     }
@@ -420,9 +436,7 @@ class AddByTimeVC: UIViewController {
                 }
         } else {
             // if swicher is off
-            
-            constantAmountToAddTextfield.text = ""
-            
+                        
             guard let uid = Auth.auth().currentUser?.uid else {return}
 
             db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
@@ -457,10 +471,11 @@ extension AddByTimeVC {
     
     func showToast(message : String, font: UIFont) {
         
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 200, height: 35))
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white
         toastLabel.font = font
+        toastLabel.center = CGPoint(x: 160, y: 285)
         toastLabel.textAlignment = .center;
         toastLabel.text = message
         toastLabel.alpha = 1.0
