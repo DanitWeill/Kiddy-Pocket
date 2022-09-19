@@ -29,12 +29,13 @@ class ForgotPasswordVC: UIViewController {
                 self.present(alert, animated: true, completion: nil)
                 return
             }
-            let alert = UIAlertController(title: "", message: "Password reset email has been sent", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "", message: "Password reset email has been sent, Please check your spam", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Thank You!", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
                 
         }
         
         }
+        dismiss(animated: true)
     }
 }

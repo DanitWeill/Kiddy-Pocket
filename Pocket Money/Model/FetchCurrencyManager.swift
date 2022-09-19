@@ -20,8 +20,12 @@ class FetchCurrencyManager {
             
             if self.rateToPass != 0.0 || self.rateToPass != nil {
                 completion(self.rateToPass)
+                print(self.rateToPass)
+                print("=================== rate to pass if rate != 0.0 || rate != nil")
             }else{
                 completion(1.0)
+                print("1.0")
+                print("=================== rate to pass if rate = 0.0 || nil")
             }
         }
         
