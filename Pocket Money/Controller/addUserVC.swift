@@ -148,6 +148,8 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
         dismiss(animated: true, completion: nil)
+        self.activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
     }
     
     
