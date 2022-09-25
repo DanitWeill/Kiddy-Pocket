@@ -43,7 +43,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        menuButton.menu = addMenuItems()
+       
+        
         addFirstKidLabel.isHidden = true
         
         
@@ -53,10 +54,20 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                 
                 if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? Home
                 {
+                    vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true, completion: nil)
                 }
+
                 
             }else{
+                
+                let user = Auth.auth().currentUser
+                if user?.isAnonymous == true {
+                    self.menuButton.menu = self.addMenuItems(userIsAnonymous: true)
+                }else{
+                    self.menuButton.menu = self.addMenuItems(userIsAnonymous: false)
+                }
+                
                 
                 self.updateDefaultCurreny()  //its needed for knowing the currency when adding a new kid
                 
@@ -234,27 +245,57 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     }
     
     
-    func addMenuItems() -> UIMenu{
-        let menuItems = UIMenu(title: "Menu", image: UIImage(systemName: "text.justify"), options: .displayInline, children: [
-            UIAction(title: "Preferred Currency", handler: { (_) in
-                self.performSegue(withIdentifier: "goToCurrency", sender: self)
-            }),
+    func addMenuItems(userIsAnonymous: Bool) -> UIMenu{
+        
+        if userIsAnonymous == true{
             
-            UIAction(title: "Sign Out", image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), attributes: .destructive , handler: { (_) in
-                print("Sign Out")
-                self.signOut()
+            let menuItems = UIMenu(title: "Menu", image: UIImage(systemName: "text.justify"), options: .displayInline, children: [
                 
-            }),
-            
-            UIAction(title: "Delete data", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
-                self.performSegue(withIdentifier: "goToDeleteData", sender: self)
-                print("delete data")
-                // delete data
+                UIAction(title: "Preferred Currency", image: UIImage(named: "exchange"), handler: { (_) in
+                    self.performSegue(withIdentifier: "goToCurrency", sender: self)
+                }),
                 
-            })
+                UIAction(title: "Sign up to save your data", image: UIImage(named: "newUser") , handler: { (_) in
+                    self.performSegue(withIdentifier: "goToSignUpVC", sender: self)
+                }),
+                
+               
+                UIAction(title: "Delete data", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
+                    self.performSegue(withIdentifier: "goToDeleteData", sender: self)
+                    print("delete data")
+                    // delete data
+                })
+                
+            ])
+            return menuItems
             
-        ])
-        return menuItems
+        }else{
+            
+            let menuItems = UIMenu(title: "Menu", image: UIImage(systemName: "text.justify"), options: .displayInline, children: [
+                
+                UIAction(title: "Preferred Currency", image: UIImage(named: "exchange"), handler: { (_) in
+                    self.performSegue(withIdentifier: "goToCurrency", sender: self)
+                }),
+                
+                UIAction(title: "Sign Out", image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), handler: { (_) in
+                    print("Sign Out")
+                    self.signOut()
+                    
+                }),
+                
+                UIAction(title: "Delete data", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
+                    self.performSegue(withIdentifier: "goToDeleteData", sender: self)
+                    print("delete data")
+                    // delete data
+                    
+                })
+                
+            ])
+            return menuItems
+            
+        }
+        
+       
     }
     
     

@@ -21,7 +21,9 @@ class SumUpdateAfterAmountAdded{
             }
           
             let dateToBegin = docs?.data()?["date_to_begin"] as? TimeInterval
-            if self.date.timeIntervalSince1970 >= (dateToBegin ?? self.date.timeIntervalSince1970) - TimeInterval(86400) {
+            let addEvery = docs?.data()?["add_every"] as? Int
+            
+            if self.date.timeIntervalSince1970 >= (dateToBegin ?? self.date.timeIntervalSince1970) - TimeInterval(86400 * (addEvery ?? 0)) {
                 // add and nullify only if it has been a day (else do nothing)
                 Firestore.firestore().collection("families").document(uid).collection("kids").document(kidName).setData([
                     "date_to_begin" : self.date.timeIntervalSince1970], merge: true)

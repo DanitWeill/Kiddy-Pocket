@@ -31,35 +31,11 @@ class DeleteDataVC: UIViewController {
         
         guard let uid = Auth.auth().currentUser?.uid else {return}
         
-        //        Firestore.firestore().collection("families").document(uid).collection("kids").document(nameToPass).collection("history").document().updateData([
-        //            "amount added": FieldValue.delete(),
-        //            "currency": FieldValue.delete(),
-        //            "date": FieldValue.delete(),
-        //            "date money added": FieldValue.delete()
-        //
-        //
-        //        ]) { err in
-        //            if let err = err {
-        //                print("Error updating document: \(err)")
-        //            } else {
-        //                print("Document successfully updated")
-        //            }
-        //        }
-        //
-        //
-        //        Firestore.firestore().collection("families").document(uid).delete() { err in
-        //            if let err = err {
-        //                print("Error removing document: \(err)")
-        //            } else {
-        //                print("Document successfully removed!")
-        //                print("========================")
-        //
         Firestore.firestore().collection("families").document(uid).collection("kids").getDocuments { querySnapshot, error in
             if let error = error{
                 print("error")
-            }else {
+            }
                 if querySnapshot?.isEmpty == false {
-                    
                     
                     for names in querySnapshot!.documents {
                         names.reference.delete() { err in
@@ -74,12 +50,15 @@ class DeleteDataVC: UIViewController {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                                     self.performSegue(withIdentifier: "GoToHome", sender: self)
                                 }
-                                
-                                
                             }
                         }
                     }
-                }
+                } else {
+                    self.showToast(message: "Data was deleted!", font: .systemFont(ofSize: 15.0))
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                        self.performSegue(withIdentifier: "GoToHome", sender: self)
+                    }
             }
         }
     }

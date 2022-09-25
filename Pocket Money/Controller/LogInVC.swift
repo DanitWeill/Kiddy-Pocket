@@ -49,6 +49,7 @@ class LogInVC: UIViewController {
                     self.activityIndicator.stopAnimating()
                     UIApplication.shared.endIgnoringInteractionEvents()
                 } else {
+                    
                     self.activityIndicator.stopAnimating()
                     UIApplication.shared.endIgnoringInteractionEvents()
                     self.performSegue(withIdentifier: "goToMainVC", sender: nil)
