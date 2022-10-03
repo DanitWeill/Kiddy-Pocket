@@ -20,9 +20,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     var kids: [Kid] = []
     
     var name = String()
-    //    var sum = Float()
     var currencyName = String()
-    var cellColor = UIColor(hexString: "#ffffff")
+    var cellColor = UIColor(hexString: "#f5520c")
     var kidImage = UIImage()
     
     var kidsIndex = Int()
@@ -42,13 +41,9 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
-        
+      
         addFirstKidLabel.isHidden = true
-        
-        
-        
+          
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             if user == nil{
                 
@@ -57,8 +52,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true, completion: nil)
                 }
-
-                
+              
             }else{
                 
                 let user = Auth.auth().currentUser
@@ -143,6 +137,10 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                     self.addFirstKidLabel.isHidden = false
                                 }else{
                                     self.addFirstKidLabel.isHidden = true
+                                    
+                                
+                                    var countForLoop = 0
+                                    
                                     for document in documents {
                                         
                                         let data = document.data()
@@ -157,58 +155,61 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                 
                                                 self.name = name
                                                 sum = Float(sum) + Float(finalAmountRecived)
-                                                                                                
                                                 
-                                                // add to database the date from start and the amount the user chose to add
-                                               
+                                                self.db.collection("families").document(uid).collection("kids").document(name).setData(["sum" : sum], merge: true)
                                                 
                                                 
-                                                SumUpdateAfterAmountAdded().sumUpdateAfterAmountAdded(amountAdded: Float(finalAmountRecived), uid: uid, kidName: name){finalSumRecived in
+                                                let colorHexString = document.data()["cellColor"] as? String ?? "#f5520c"
+                                                self.cellColor = UIColor(hexString: "\(colorHexString)")
                                                 
-                                                    sum = finalSumRecived
+                                                
+                                                if document.data()["pictureURL"] as? String != "" {
                                                     
-                                                // grab from db the cell color & picture
-                                                if document.data()["cellColor"] as? String != nil {
-                                                    let colorHexString = document.data()["cellColor"] as! String
-                                                    self.cellColor = UIColor(hexString: "\(colorHexString)")
-                                                    
-                                                    
-                                                    if document.data()["pictureURL"] as? String != "" {
-                                                        let imageURL = document.data()["pictureURL"] as? String
-                                                        let storage = Storage.storage().reference(forURL: imageURL!)
-                                                        storage.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                                                            if let error = error {
-                                                                self.kidImage = UIImage(named: "userIcon")!
-                                                                print(error.localizedDescription)
-                                                                
-                                                                let newUser = Kid(name: name, sum:String(format: "%.2f", sum * self.rate), cellColor: self.cellColor, picture: self.kidImage)
-                                                                
-                                                                self.kids.append(newUser)
+                                                    let imageURL = document.data()["pictureURL"] as? String
+                                                    let storage = Storage.storage().reference(forURL: imageURL!)
+                                                    storage.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                                                        if let error = error {
+                                                            self.kidImage = UIImage(named: "userIcon")!
+                                                            print(error.localizedDescription)
+                                                            
+                                                            let newUser = Kid(name: name, sum:String(format: "%.2f", sum * self.rate), cellColor: self.cellColor, picture: self.kidImage)
+                                                            
+                                                            self.kids.append(newUser)
+                                                            
+                                                            countForLoop = countForLoop + 1
+                                                            if countForLoop == documents.count{
                                                                 self.reloadData()
-                                                                
-                                                                
-                                                            } else {
-                                                                let colorHexString = document.data()["cellColor"] as! String
-                                                                self.cellColor = UIColor(hexString: "\(colorHexString)")
-                                                                
-                                                                self.kidImage = UIImage(data: data!)!
-                                                                
-                                                                let newUser = Kid(name: name, sum: String(format: "%.2f", sum * self.rate), cellColor: self.cellColor, picture: self.kidImage)
-                                                                
-                                                                self.kids.append(newUser)
-                                                                self.reloadData()
-                                                                
                                                             }
+                                                            
+                                                            
+                                                        } else {
+                                                            let colorHexString = document.data()["cellColor"] as! String
+                                                            self.cellColor = UIColor(hexString: "\(colorHexString)")
+                                                            
+                                                            self.kidImage = UIImage(data: data!)!
+                                                            
+                                                            let newUser = Kid(name: name, sum: String(format: "%.2f", sum * self.rate), cellColor: self.cellColor, picture: self.kidImage)
+                                                            
+                                                            self.kids.append(newUser)
+                                                            
+                                                            countForLoop = countForLoop + 1
+                                                            if countForLoop == documents.count{
+                                                                self.reloadData()
+                                                            }
+                                                            
                                                         }
-                                                        
-                                                    }else{
-                                                        self.kidImage = UIImage(named: "userIcon")!
-                                                        
-                                                        let newUser = Kid(name: name, sum: String(format: "%.2f", sum * self.rate), cellColor: self.cellColor, picture: self.kidImage)
-                                                        
-                                                        self.kids.append(newUser)
-                                                        self.reloadData()
                                                     }
+                                                    
+                                                }else{
+                                                    self.kidImage = UIImage(named: "userIcon")!
+                                                    
+                                                    let newUser = Kid(name: name, sum: String(format: "%.2f", sum * self.rate), cellColor: self.cellColor, picture: self.kidImage)
+                                                    
+                                                    self.kids.append(newUser)
+                                                    
+                                                    countForLoop = countForLoop + 1
+                                                    if countForLoop == documents.count{
+                                                        self.reloadData()
                                                     }
                                                 }
                                             }
@@ -259,13 +260,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                     self.performSegue(withIdentifier: "goToSignUpVC", sender: self)
                 }),
                 
-               
+                
                 UIAction(title: "Delete data", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
                     self.performSegue(withIdentifier: "goToDeleteData", sender: self)
                     print("delete data")
                     // delete data
                 })
-                
             ])
             return menuItems
             
@@ -289,13 +289,9 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                     // delete data
                     
                 })
-                
             ])
             return menuItems
-            
         }
-        
-       
     }
     
     
@@ -333,10 +329,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                 ])
                 self.currencyName = "EUR"
             }
-            
-            
         })
-        
     }
     
     
@@ -362,10 +355,7 @@ extension MainVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return kids.count
     }
-    
-    
-    
-    
+     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCellIdentifier", for: indexPath) as! UserCell
         

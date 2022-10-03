@@ -12,7 +12,6 @@ struct DateHistoryArray {
     var dateMoneyAdded: String
     var amountAdded: Float
     var currencyAdded: String
-//    var plusMinusImage: UIImage
     
     
 }

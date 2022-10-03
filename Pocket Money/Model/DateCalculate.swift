@@ -17,44 +17,42 @@ class DateCalculate{
     var timesToAdd = 0
     var finalAmountOfMoneyToAdd = 0
     
+    
+    // Calculate how often to add money
+
     func dateCalculate(nameToPass: String, currency: String, constantAmountToAdd: Int, addEvery: Int, dateToBegin: TimeInterval, completion: @escaping (Int) -> Void) {
         
         let uid = Auth.auth().currentUser?.uid ?? ""
         var distance = Int()
-        var constantDateArray: [ConstantDateArray] = []
-        var dateToWriteString: String = ""
+        var constantHistoryDateArray: [ConstantHistoryDateArray] = []
         
-        // Calculate how often to add money
+        
         let now = self.date.timeIntervalSince1970
-        
-        if addEvery == 0 || constantAmountToAdd == 0{
+
+        if addEvery == 0 || constantAmountToAdd == 0 {  // if user has NOT set constant time and amount to add
+
             self.finalAmountOfMoneyToAdd = 0
             
-        } else if now <= dateToBegin {
+        } else if now <= dateToBegin { // If date to start has NOT passed
             self.finalAmountOfMoneyToAdd = 0
             
-        } else if now > dateToBegin {
+        } else if now >= (dateToBegin) + TimeInterval(86400 * (addEvery)) {
+            // If date to start + addevery has passed- check the distance
             
             distance = Int((now - dateToBegin) / 86400)
             
-            if distance >= addEvery{
-                
-                var numOfAdds = 0
-                
-                if distance == 0{
-                    numOfAdds = 0
-                }else{
-                    numOfAdds = Int(distance / addEvery)
-                }
-                
-                
-                self.finalAmountOfMoneyToAdd = numOfAdds * constantAmountToAdd
-                
+            var numOfAdds = 0
+            
+            if distance == 0{ // if it is still the dateToBegin- don't add
+                numOfAdds = 0
+            }else{  // check how many times to add
+                numOfAdds = Int(distance / addEvery)
             }
-            // add to database the date from start and the amount the user chose to add
+            
+            self.finalAmountOfMoneyToAdd = numOfAdds * constantAmountToAdd
             
             
-            
+            // check how many times to add so it will be writen in the database.
             if addEvery != 0 {
                 let howManyAddEvery = Int(distance / addEvery)
                 
@@ -75,6 +73,7 @@ class DateCalculate{
                         print("=================")
                         print(dateToWriteString)
                         
+                        // add to database the date from start and the amount the user chose to add
                         self.db.collection("families").document(uid).collection("kids").document(nameToPass).collection("history").addDocument(data: [
                             "date money added": dateToWriteString,
                             "amount added": constantAmountToAdd,
@@ -92,7 +91,7 @@ class DateCalculate{
                 }
             }
         }
-      
+        
         
         completion(self.finalAmountOfMoneyToAdd)
         
@@ -100,7 +99,7 @@ class DateCalculate{
     }
 }
 
-struct ConstantDateArray {
+struct ConstantHistoryDateArray {
     let dateToWrite: String
     let constantAmountToAdd: Int
     let currency: String
