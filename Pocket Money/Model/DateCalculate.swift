@@ -24,7 +24,7 @@ class DateCalculate{
         
         let uid = Auth.auth().currentUser?.uid ?? ""
         var distance = Int()
-        var constantHistoryDateArray: [ConstantHistoryDateArray] = []
+        var constantHistoryDateArray: [DateHistoryArray] = []
         
         
         let now = self.date.timeIntervalSince1970
@@ -43,53 +43,62 @@ class DateCalculate{
             
             var numOfAdds = 0
             
-            if distance == 0{ // if it is still the dateToBegin- don't add
+            if distance == 0 { // if it is still the dateToBegin- don't add
                 numOfAdds = 0
-            }else{  // check how many times to add
+            } else {  // check how many times to add
                 numOfAdds = Int(distance / addEvery)
-            }
-            
-            self.finalAmountOfMoneyToAdd = numOfAdds * constantAmountToAdd
-            
-            
-            // check how many times to add so it will be writen in the database.
-            if addEvery != 0 {
-                let howManyAddEvery = Int(distance / addEvery)
                 
-                if howManyAddEvery > 0 {
+                
+                
+                
+                
+                
+                // check how many times to add so it will be writen in the database.
+                if addEvery != 0 {
+//                    let howManyAddEvery = Int(distance / addEvery)
                     
-                    for i in 1...howManyAddEvery{
+                    if numOfAdds > 0 {
                         
-                        let dateToWrite =  TimeInterval(Int(dateToBegin) + (i * addEvery * 86400))
-                        let dateToWrite2 = NSDate(timeIntervalSince1970: dateToWrite)
-                        
-                        let date = Date()
-                        let formatter = DateFormatter()
-                        formatter.timeZone = .current
-                        formatter.locale = .current
-                        formatter.dateFormat = "MMM d, yyyy"
-                        var dateToWriteString = formatter.string(from: dateToWrite2 as Date)
-                        
-                        print("=================")
-                        print(dateToWriteString)
-                        
-                        // add to database the date from start and the amount the user chose to add
-                        self.db.collection("families").document(uid).collection("kids").document(nameToPass).collection("history").addDocument(data: [
-                            "date money added": dateToWriteString,
-                            "amount added": constantAmountToAdd,
-                            "date": dateToWrite,
-                            "currency": currency
-                        ]) { err in
-                            if let err = err {
-                                print("Error writing document: \(err)")
-                            } else {
-                                print("Document successfully written!")
+                        for i in 1...numOfAdds{
+                            
+                            let dateToWrite =  TimeInterval(Int(dateToBegin) + (i * addEvery * 86400))
+                            let dateToWrite2 = NSDate(timeIntervalSince1970: dateToWrite)
+                            
+                            let date = Date()
+                            let formatter = DateFormatter()
+                            formatter.timeZone = .current
+                            formatter.locale = .current
+                            formatter.dateFormat = "MMM d, yyyy"
+                            var dateToWriteString = formatter.string(from: dateToWrite2 as Date)
+                            
+                            print("=================")
+                            print(dateToWriteString)
+                            
+                            // add to database the date from start and the amount the user chose to add
+                            self.db.collection("families").document(uid).collection("kids").document(nameToPass).collection("history").addDocument(data: [
+                                "date money added": dateToWriteString,
+                                "amount added": constantAmountToAdd,
+                                "date": dateToWrite,
+                                "currency": currency
+                            ]) { err in
+                                if let err = err {
+                                    print("Error writing document: \(err)")
+                                } else {
+                                    print("Document successfully written!")
+                                }
                             }
                         }
                         
                     }
                 }
             }
+            self.finalAmountOfMoneyToAdd = numOfAdds * constantAmountToAdd
+
+            
+//             add and nullify only if it has been a day (else do nothing)
+                Firestore.firestore().collection("families").document(uid).collection("kids").document(nameToPass).setData([
+                    "date_to_begin" : self.date.timeIntervalSince1970], merge: true)
+             
         }
         
         
@@ -99,8 +108,3 @@ class DateCalculate{
     }
 }
 
-struct ConstantHistoryDateArray {
-    let dateToWrite: String
-    let constantAmountToAdd: Int
-    let currency: String
-}

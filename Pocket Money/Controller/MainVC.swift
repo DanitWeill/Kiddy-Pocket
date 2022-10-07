@@ -261,9 +261,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                 }),
                 
                 
-                UIAction(title: "Delete data", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
+                UIAction(title: "Delete your data", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
                     self.performSegue(withIdentifier: "goToDeleteData", sender: self)
-                    print("delete data")
                     // delete data
                 })
             ])
@@ -283,9 +282,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                     
                 }),
                 
-                UIAction(title: "Delete data", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
+                UIAction(title: "Delete your data", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
                     self.performSegue(withIdentifier: "goToDeleteData", sender: self)
-                    print("delete data")
                     // delete data
                     
                 })

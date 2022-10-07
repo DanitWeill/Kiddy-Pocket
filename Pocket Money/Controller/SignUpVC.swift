@@ -32,7 +32,7 @@ class SignUpVC: UIViewController {
         
         if let email = usernameTextField.text, let password = passwordTextField.text {
             if email != "" && password != "" {
-                //check if user is anonymos- if anonymous (convert to user), if not anonymous ( sign up)
+                //check if user is anonymos- if anonymous (convert to user)
                 
                 let user = Auth.auth().currentUser
                 if user?.isAnonymous == true {
@@ -41,6 +41,13 @@ class SignUpVC: UIViewController {
                         if let error = error {
                             print(error.localizedDescription)
                             self.errorLabel.text = "\(error.localizedDescription)"
+                        }
+                        if let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainVC") as? MainVC {
+                            let navVC = UINavigationController(rootViewController: mainVC)
+                            navVC.modalPresentationStyle = .fullScreen
+                            
+                            self.present(navVC, animated: true, completion: nil)
+                            
                         }
                     }
                     
@@ -71,13 +78,13 @@ class SignUpVC: UIViewController {
                         
                     }
                 }
-            }
+            
         } else {
             errorLabel.isHidden = false
             errorLabel.text = "Please enter email and password"
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3 ) {
                 self.errorLabel.isHidden = true
-                
+            }
             }
         }
     }
