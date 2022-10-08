@@ -16,7 +16,7 @@ class FetchCurrencyManager {
         
         let urlString = "\(baseCoinURL)/\(currencyName)?apikey=\(apiKey)"
         performRequest(coinString: urlString)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1 ) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2 ) {
             
             if self.rateToPass != 0.0 || self.rateToPass != nil {
                 completion(self.rateToPass)
@@ -34,13 +34,10 @@ class FetchCurrencyManager {
     
     
     func performRequest(coinString: String){
-        //create url
         if let url = URL(string: coinString){
             
-            //create url session
             let session = URLSession(configuration: .default)
             
-            //give the session a task
             let task = session.dataTask(with: url) { data, response, error in
                 if error != nil {
                     print(error!)

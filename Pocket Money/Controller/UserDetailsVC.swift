@@ -44,7 +44,6 @@ class UserDetailsVC: UIViewController {
         addMoneyPicker.clipsToBounds = true
           view.addSubview(addMoneyPicker)
         
-//        userPicture.layer.cornerRadius = 100
         kidPicture.clipsToBounds = true
         importData()
         
@@ -164,9 +163,6 @@ class UserDetailsVC: UIViewController {
             
         }
     }
-    
-    
-    
 }
 
 
@@ -174,7 +170,6 @@ class UserDetailsVC: UIViewController {
 extension UserDetailsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrayOfDate.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
