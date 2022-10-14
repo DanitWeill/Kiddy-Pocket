@@ -57,7 +57,7 @@ class AddByTimeVC: UIViewController {
             if let error = error{
                 print(error)
             }
-            print("=======================")
+
 
             let constantAmountToAdd = doc?["constant_amount_to_add"] as? Int ?? 0
             let addEvery = doc?.data()?["add_every"] as? Int ?? 0
@@ -415,7 +415,7 @@ class AddByTimeVC: UIViewController {
                 let date = Date()
                 
                 db.collection("families").document(uid).collection("kids").document(nameToPass).updateData([
-                    "constant_amount_to_add": Int(constantAmountToAddTextfield.text ?? "0"),
+                    "constant_amount_to_add": Int(constantAmountToAddTextfield.text ?? ""),
                     "date_to_begin": date.timeIntervalSince1970 + TimeInterval(daysToAdd * 86400),
                     "add_every": addEvery,
                     "week_day_to_begin": weekDayToBegin,

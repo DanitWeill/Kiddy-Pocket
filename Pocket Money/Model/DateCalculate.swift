@@ -19,7 +19,7 @@ class DateCalculate{
     
     
     // Calculate how often to add money
-
+    
     func dateCalculate(nameToPass: String, currency: String, constantAmountToAdd: Int, addEvery: Int, dateToBegin: TimeInterval, completion: @escaping (Int) -> Void) {
         
         let uid = Auth.auth().currentUser?.uid ?? ""
@@ -28,9 +28,9 @@ class DateCalculate{
         
         
         let now = self.date.timeIntervalSince1970
-
+        
         if addEvery == 0 || constantAmountToAdd == 0 {  // if user has NOT set constant time and amount to add
-
+            
             self.finalAmountOfMoneyToAdd = 0
             
         } else if now <= dateToBegin { // If date to start has NOT passed
@@ -48,19 +48,14 @@ class DateCalculate{
             } else {  // check how many times to add
                 numOfAdds = Int(distance / addEvery)
                 
-                
-                
-                
-                
-                
                 // check how many times to add so it will be writen in the database.
                 if addEvery != 0 {
-//                    let howManyAddEvery = Int(distance / addEvery)
+                    //                    let howManyAddEvery = Int(distance / addEvery)
                     
                     if numOfAdds > 0 {
                         
                         for i in 1...numOfAdds{
-                            
+                          
                             let dateToWrite =  TimeInterval(Int(dateToBegin) + (i * addEvery * 86400))
                             let dateToWrite2 = NSDate(timeIntervalSince1970: dateToWrite)
                             
@@ -70,9 +65,6 @@ class DateCalculate{
                             formatter.locale = .current
                             formatter.dateFormat = "MMM d, yyyy"
                             var dateToWriteString = formatter.string(from: dateToWrite2 as Date)
-                            
-                            print("=================")
-                            print(dateToWriteString)
                             
                             // add to database the date from start and the amount the user chose to add
                             self.db.collection("families").document(uid).collection("kids").document(nameToPass).collection("history").addDocument(data: [
@@ -90,15 +82,20 @@ class DateCalculate{
                         }
                         
                     }
+                    
+                    
+                    
+                    //             add and nullify only if it has been a day (else do nothing)
+                    Firestore.firestore().collection("families").document(uid).collection("kids").document(nameToPass).setData([
+                        "date_to_begin" : self.date.timeIntervalSince1970], merge: true)
+                    
+                    
                 }
+                
             }
             self.finalAmountOfMoneyToAdd = numOfAdds * constantAmountToAdd
-
             
-//             add and nullify only if it has been a day (else do nothing)
-                Firestore.firestore().collection("families").document(uid).collection("kids").document(nameToPass).setData([
-                    "date_to_begin" : self.date.timeIntervalSince1970], merge: true)
-             
+          
         }
         
         

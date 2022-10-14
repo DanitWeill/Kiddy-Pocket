@@ -66,25 +66,25 @@ class SignUpVC: UIViewController {
                                 self.errorLabel.isHidden = true
                                 
                             }
+                        } else {
+                            if let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainVC") as? MainVC {
+                                let navVC = UINavigationController(rootViewController: mainVC)
+                                navVC.modalPresentationStyle = .fullScreen
+                                
+                                self.present(navVC, animated: true, completion: nil)
+                                
+                                
+                            }
                         }
-                        if let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainVC") as? MainVC {
-                            let navVC = UINavigationController(rootViewController: mainVC)
-                            navVC.modalPresentationStyle = .fullScreen
-
-                            self.present(navVC, animated: true, completion: nil)
-                            
-                            
-                        }
-                        
                     }
                 }
-            
-        } else {
-            errorLabel.isHidden = false
-            errorLabel.text = "Please enter email and password"
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3 ) {
-                self.errorLabel.isHidden = true
-            }
+                
+            } else {
+                errorLabel.isHidden = false
+                errorLabel.text = "Please enter email and password"
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3 ) {
+                    self.errorLabel.isHidden = true
+                }
             }
         }
     }

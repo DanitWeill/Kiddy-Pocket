@@ -43,7 +43,7 @@ class DeleteDataVC: UIViewController {
                                 print("Error removing document: \(err)")
                             } else {
                                 print("Document successfully removed!")
-                                print("========================")
+                           
                                 
                                 self.showToast(message: "Data was deleted!", font: .systemFont(ofSize: 15.0))
                                 
