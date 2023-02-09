@@ -107,8 +107,8 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
         guard let imageData = image.pngData() else {
             return
         }
-        
-        picturePath = "userPicture/\(textFieldName.text).png"
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        picturePath = "userPicture/\(uid)+\(textFieldName.text).png"
         
         progressView.isHidden = false
         
