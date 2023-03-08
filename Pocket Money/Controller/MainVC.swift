@@ -134,8 +134,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                     UIApplication.shared.endIgnoringInteractionEvents()
                                     self.addFirstKidLabel.isHidden = false
                                 }else{
-                                    self.activityIndicator.stopAnimating()
-                                    UIApplication.shared.endIgnoringInteractionEvents()
                                     self.addFirstKidLabel.isHidden = true
                                     
                                     var countForLoop = 0
@@ -340,9 +338,9 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
             userDetailsVC.currencyNameToPass = currencyName
             print(kids)
         }
-        if let addUserVC = segue.destination as? AddUserVC {
-            addUserVC.rateToPass = rate
-        }
+//        if let addUserVC = segue.destination as? AddUserVC {
+//            addUserVC.rateToPass = rate
+//        }
     }
     
 }

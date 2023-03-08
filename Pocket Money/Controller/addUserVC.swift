@@ -25,7 +25,6 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     let storage = Storage.storage().reference()
     var picturePath = String()
     var cellColor = UIColor(hexString: "#f5520c")
-    var rateToPass = Float()
 
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
