@@ -59,7 +59,18 @@ extension CurrencyVC: UITableViewDelegate, UITableViewDataSource{
         print(currencyName)
         updatedCurrencyNameInDB()
         
-        dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "goToMainVC", sender: self)
+        if let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainVC") as? MainVC {
+
+            let navVC = UINavigationController(rootViewController: mainVC)
+            navVC.modalPresentationStyle = .fullScreen
+            
+            
+    
+
+            self.present(navVC, animated: true, completion: nil)
+        }
+//        dismiss(animated: true, completion: nil)
     }
     
 }

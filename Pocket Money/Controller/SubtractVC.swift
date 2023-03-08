@@ -37,7 +37,7 @@ class SubtractVC: UIViewController {
                 print(err.localizedDescription)
             }else{
                 if doc?.data()?["sum"] != nil{
-                    let data = doc?.data()?["sum"] as? Float
+                    let data = doc?.data()?["sum"] as? Int
                 }
             }
         }
@@ -75,7 +75,7 @@ class SubtractVC: UIViewController {
                     return nil
                 }
                 
-                guard let oldSum = sfDocument.data()?["sum"] as? Float else {
+                guard let oldSum = sfDocument.data()?["sum"] as? Int else {
                     let error = NSError(
                         domain: "AppErrorDomain",
                         code: -1,
@@ -88,10 +88,8 @@ class SubtractVC: UIViewController {
                 }
                 
                 //update sum in db
-                let amountSubtractRate = Float(self.amountSubtract) / self.rateToPass
                 
-                transaction.updateData(["sum": oldSum - Float(amountSubtractRate)], forDocument: sumReference)
-                
+                transaction.updateData(["sum": oldSum - self.amountSubtract], forDocument: sumReference)
                 
                 return nil
             }) { (object, error) in

@@ -20,7 +20,7 @@ class DateCalculate{
     
     // Calculate how often to add money
     
-    func dateCalculate(nameToPass: String, currency: String, constantAmountToAdd: Int, addEvery: Int, dateToBegin: TimeInterval, completion: @escaping (Int) -> Void) {
+    func dateCalculate(nameToPass: String, constantAmountToAdd: Int, addEvery: Int, dateToBegin: TimeInterval, completion: @escaping (Int) -> Void) {
         
         let uid = Auth.auth().currentUser?.uid ?? ""
         var distance = Int()
@@ -71,7 +71,7 @@ class DateCalculate{
                                 "date money added": dateToWriteString,
                                 "amount added": constantAmountToAdd,
                                 "date": dateToWrite,
-                                "currency": currency
+//                                "currency": currency
                             ]) { err in
                                 if let err = err {
                                     print("Error writing document: \(err)")

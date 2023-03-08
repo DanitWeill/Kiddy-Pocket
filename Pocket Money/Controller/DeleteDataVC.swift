@@ -28,15 +28,15 @@ class DeleteDataVC: UIViewController {
     
     
     @IBAction func yesButton(_ sender: UIButton) {
-        
-        guard let uid = Auth.auth().currentUser?.uid else {return}
+        guard let user = Auth.auth().currentUser else {return}
+        let uid = user.uid
         
         Firestore.firestore().collection("families").document(uid).collection("kids").getDocuments { querySnapshot, error in
             if let error = error{
                 print("error")
             }
+            user.delete()
                 if querySnapshot?.isEmpty == false {
-                    
                     for names in querySnapshot!.documents {
                         names.reference.delete() { err in
                             if let err = err {

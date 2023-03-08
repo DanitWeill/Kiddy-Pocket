@@ -116,7 +116,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="gca-TV-5zs"/>
                     <connections>
-                        <segue destination="ZOD-x0-5Jh" kind="custom" identifier="goToMainVC" id="iu2-4g-SYV"/>
+                        <segue destination="yan-Vu-cGw" kind="show" identifier="goToCurrency" id="4DY-6i-B6r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -439,7 +439,6 @@
                         <outlet property="menuButton" destination="pKZ-Gd-3U8" id="82y-AL-M9M"/>
                         <outlet property="tableView" destination="ss6-Xh-Ojy" id="9Pl-PD-562"/>
                         <segue destination="yUM-5C-Mhb" kind="show" identifier="goToUserDetailsVC" id="ngh-cc-Z6u"/>
-                        <segue destination="yan-Vu-cGw" kind="presentation" identifier="goToCurrency" id="1on-FD-62Q"/>
                         <segue destination="VmC-mq-Jiu" kind="presentation" identifier="goToDeleteData" id="QBM-lh-PoM"/>
                         <segue destination="sPz-Zk-H7u" kind="show" identifier="goToSignUpVC" id="4HE-MC-Cjo"/>
                     </connections>
@@ -547,15 +546,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAc-LC-vi8">
-                                <rect key="frame" x="61.5" y="78" width="291" height="43"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orange circle upside " translatesAutoresizingMaskIntoConstraints="NO" id="dkj-M9-hwE">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="175"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="175" id="Pdg-10-oy6"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orange circle " translatesAutoresizingMaskIntoConstraints="NO" id="eYy-Ds-6OF">
+                                <rect key="frame" x="0.0" y="663" width="414" height="175"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="175" id="zxg-3f-ZRm"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the currency you want to use" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAc-LC-vi8">
+                                <rect key="frame" x="30" y="78" width="354" height="86"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please notice you can only choose now, and the currency name cannot be changed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNz-Zd-6iX">
+                                <rect key="frame" x="40" y="194" width="334" height="72"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dAo-7A-7yp">
-                                <rect key="frame" x="55" y="151" width="304" height="647"/>
+                                <rect key="frame" x="55" y="296" width="304" height="300"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="5Hf-kA-cbv"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="currencyCell" id="SvC-ba-BIL">
                                         <rect key="frame" x="0.0" y="50" width="304" height="43.5"/>
@@ -571,22 +591,33 @@
                         <viewLayoutGuide key="safeArea" id="eiK-md-oAq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="dAo-7A-7yp" firstAttribute="top" secondItem="GAc-LC-vi8" secondAttribute="bottom" constant="30" id="5XA-TP-FiB"/>
+                            <constraint firstItem="eYy-Ds-6OF" firstAttribute="leading" secondItem="eiK-md-oAq" secondAttribute="leading" id="0p1-ds-2E8"/>
+                            <constraint firstAttribute="trailing" secondItem="pNz-Zd-6iX" secondAttribute="trailing" constant="40" id="3ii-u3-Usn"/>
                             <constraint firstItem="GAc-LC-vi8" firstAttribute="top" secondItem="eiK-md-oAq" secondAttribute="top" constant="30" id="AmS-Em-Nqf"/>
+                            <constraint firstItem="eYy-Ds-6OF" firstAttribute="trailing" secondItem="eiK-md-oAq" secondAttribute="trailing" id="DHv-4H-9dH"/>
                             <constraint firstItem="dAo-7A-7yp" firstAttribute="leading" secondItem="eiK-md-oAq" secondAttribute="leading" constant="55" id="FfN-iJ-gn9"/>
                             <constraint firstItem="GAc-LC-vi8" firstAttribute="centerX" secondItem="RvJ-Qa-VDi" secondAttribute="centerX" id="NzT-0p-Lbj"/>
-                            <constraint firstItem="eiK-md-oAq" firstAttribute="bottom" secondItem="dAo-7A-7yp" secondAttribute="bottom" constant="40" id="OBB-gh-1h8"/>
+                            <constraint firstItem="dkj-M9-hwE" firstAttribute="leading" secondItem="eiK-md-oAq" secondAttribute="leading" id="Pky-sK-GU9"/>
+                            <constraint firstItem="pNz-Zd-6iX" firstAttribute="leading" secondItem="RvJ-Qa-VDi" secondAttribute="leading" constant="40" id="QHi-Pw-a94"/>
                             <constraint firstItem="eiK-md-oAq" firstAttribute="trailing" secondItem="dAo-7A-7yp" secondAttribute="trailing" constant="55" id="Qnc-Zd-YAn"/>
+                            <constraint firstAttribute="trailing" secondItem="GAc-LC-vi8" secondAttribute="trailing" constant="30" id="TTx-hX-ezh"/>
+                            <constraint firstItem="eYy-Ds-6OF" firstAttribute="bottom" secondItem="eiK-md-oAq" secondAttribute="bottom" id="h4L-Os-mWL"/>
+                            <constraint firstItem="GAc-LC-vi8" firstAttribute="leading" secondItem="RvJ-Qa-VDi" secondAttribute="leading" constant="30" id="iUC-MH-mvS"/>
+                            <constraint firstItem="pNz-Zd-6iX" firstAttribute="top" secondItem="GAc-LC-vi8" secondAttribute="bottom" constant="30" id="oaf-lJ-dXW"/>
+                            <constraint firstItem="dkj-M9-hwE" firstAttribute="top" secondItem="RvJ-Qa-VDi" secondAttribute="top" id="uMh-ZA-nZt"/>
+                            <constraint firstItem="dAo-7A-7yp" firstAttribute="top" secondItem="pNz-Zd-6iX" secondAttribute="bottom" constant="30" id="uz6-VQ-pA7"/>
+                            <constraint firstItem="dkj-M9-hwE" firstAttribute="trailing" secondItem="eiK-md-oAq" secondAttribute="trailing" id="wZA-Vo-FCW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CgA-ZV-GPj"/>
                     <connections>
                         <outlet property="currencyTableView" destination="dAo-7A-7yp" id="LfD-Mp-w2p"/>
+                        <segue destination="gd1-ll-voN" kind="show" identifier="goToMainVC" id="v1b-hA-ORb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKH-9t-GAr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6499" y="905"/>
+            <point key="canvasLocation" x="4750.7246376811599" y="152.67857142857142"/>
         </scene>
         <!--addUserVC-->
         <scene sceneID="UNU-sc-OMN">
@@ -1344,8 +1375,8 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbL-dc-o4j">
-                                <rect key="frame" x="186.5" y="481" width="41.5" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbL-dc-o4j">
+                                <rect key="frame" x="183.5" y="481" width="47.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1514,8 +1545,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QMl-J5-d63"/>
-        <segue reference="iu2-4g-SYV"/>
+        <segue reference="v1b-hA-ORb"/>
         <segue reference="4HE-MC-Cjo"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -1528,6 +1558,8 @@
         <image name="color circle orange 2" width="1278" height="637"/>
         <image name="exclamationmark.triangle" width="128" height="128"/>
         <image name="line.horizontal.3" catalog="system" width="128" height="65"/>
+        <image name="orange circle " width="1622" height="692"/>
+        <image name="orange circle upside " width="1622" height="692"/>
         <image name="sutractMoney" width="517" height="517"/>
         <image name="textfield" width="894" height="279"/>
         <image name="upside circles backgrount new" width="990" height="391"/>
@@ -1537,6 +1569,9 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -27,11 +27,8 @@ class UserDetailsVC: UIViewController {
     
     var kidsStringToPass: [Kid] = []
     var kidsIndex = 0
-    var currencySumToPass = Float()
+    var currencySumToPass = Int()
     var currencyNameToPass = String()
-    var rateToPass = Float()
-    
-    
     
     let addMoneyVC = AddMoneyVC()
     
@@ -75,13 +72,11 @@ class UserDetailsVC: UIViewController {
             }else{
                 
                 if doc?.data()?["sum"] != nil{
-                    if let data = doc?.data()?["sum"] as? Float{
-                        let sum = (data) * self.rateToPass
-                        self.sumLabel.text = String(format: "%.2f", sum)
+                    if let data = doc?.data()?["sum"] as? Int{
+                        let sum = data
+                        self.sumLabel.text = String(sum)
                     } else {
                         print ("error loading sum in user details vc- check there")
-                        print ("XXXXXXXXXXXXXXXXXX")
-
                     }
                 }
                 
@@ -159,7 +154,6 @@ class UserDetailsVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let popUpButtonsVC = segue.destination as? PopUpButtonsVC {
             popUpButtonsVC.nameToPass = nameLabel.text!
-            popUpButtonsVC.rateToPass = rateToPass
             
         }
     }

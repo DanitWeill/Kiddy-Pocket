@@ -38,7 +38,7 @@ class AddMoneyVC: UIViewController {
                 print(err.localizedDescription)
             }else{
                 if doc?.data()?["sum"] != nil{
-                    let data = doc?.data()?["sum"] as? Float
+                    let data = doc?.data()?["sum"] as? Int
                 }
             }
         }
@@ -75,7 +75,7 @@ class AddMoneyVC: UIViewController {
                     return nil
                 }
                 
-                guard let oldSum = sfDocument.data()?["sum"] as? Float else {
+                guard let oldSum = sfDocument.data()?["sum"] as? Int else {
                     let error = NSError(
                         domain: "AppErrorDomain",
                         code: -1,
@@ -88,11 +88,8 @@ class AddMoneyVC: UIViewController {
                 }
                 
                 //update sum in db
-                let amountAddedRate = Float(self.amountAdded) / self.rateToPass
+                transaction.updateData(["sum": oldSum + self.amountAdded], forDocument: sumReference)
                 
-                transaction.updateData(["sum": oldSum + Float(amountAddedRate)], forDocument: sumReference)
-                
-    
                 return nil
             }) { (object, error) in
                 if let error = error {

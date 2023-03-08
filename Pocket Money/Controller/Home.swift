@@ -28,17 +28,10 @@ class Home: UIViewController {
                 self.view.addSubview(errorLabel)
                                      
             }
-        
-            if let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainVC") as? MainVC {
-
-                let navVC = UINavigationController(rootViewController: mainVC)
-                navVC.modalPresentationStyle = .fullScreen
-
-                self.present(navVC, animated: true, completion: nil)
-            }
-            
+         
         }
-        
+        self.performSegue(withIdentifier: "goToCurrency", sender: self)
+
     }
 }
 

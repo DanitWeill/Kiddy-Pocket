@@ -409,7 +409,7 @@ class AddByTimeVC: UIViewController {
     }
     
     @IBAction func saveChangesButtonPressed(_ sender: UIButton) {
-        if swicherOnOff == true {
+        if swicherOnOff == true { //on
 
                 guard let uid = Auth.auth().currentUser?.uid else {return}
                 let date = Date()
@@ -429,7 +429,6 @@ class AddByTimeVC: UIViewController {
                     }
                 }
           
-            
             showToast(message: "Saved!", font: .systemFont(ofSize: 12.0))
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.dismiss(animated: true)

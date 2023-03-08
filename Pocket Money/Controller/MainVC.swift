@@ -41,19 +41,17 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+       
         addFirstKidLabel.isHidden = true
           
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
-            if user == nil{
-                
-                if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? Home
-                {
+            if user == nil {
+                if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? Home {
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true, completion: nil)
                 }
               
-            }else{
+            } else {
                 
                 let user = Auth.auth().currentUser
                 if user?.isAnonymous == true {
@@ -88,7 +86,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         })
     }
     
-    
+  
     @objc func updateRecived(){
         updateDefaultCurreny()
         loadKids()
@@ -112,16 +110,16 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
         self.kids = []
         
         self.db.collection("families").document(uid).getDocument { doc, error in
-            if let err = error{
+            if let err = error {
                 print(err.localizedDescription)
-            }else{
+            } else {
                 
                 let currency = doc?.data()?["currency"] ?? "EUR"
                 
                 self.currencyName = currency as! String
                 
-                FetchCurrencyManager().fetchCoin(currencyName: currency as! String) { rateRecived in
-                    self.rate = rateRecived
+//                FetchCurrencyManager().fetchCoin(currencyName: currency as! String) { rateRecived in
+//                    self.rate = rateRecived
                     
                     self.db.collection("families").document(uid).collection("kids").getDocuments { querySnapshot, error in
                         if let e = error {
@@ -131,14 +129,15 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                             
                             if let documents = querySnapshot?.documents {
                                 
-                                if documents.count == 0{
+                                if documents.count == 0 {
                                     self.activityIndicator.stopAnimating()
                                     UIApplication.shared.endIgnoringInteractionEvents()
                                     self.addFirstKidLabel.isHidden = false
                                 }else{
+                                    self.activityIndicator.stopAnimating()
+                                    UIApplication.shared.endIgnoringInteractionEvents()
                                     self.addFirstKidLabel.isHidden = true
                                     
-                                
                                     var countForLoop = 0
                                     
                                     for document in documents {
@@ -148,13 +147,13 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                         self.constantAmountToAdd = data["constant_amount_to_add"] as? Int ?? 0
                                         self.addEvery = data["add_every"] as? Int ?? 0
                                         self.dateToBegin = data["date_to_begin"] as? TimeInterval ?? 0
-                                        
-                                        if let name = data["name"] as? String, var sum = data["sum"] as? Float  {
+
+                                        if let name = data["name"] as? String, var sum = data["sum"] as? Int {
                                             
-                                            DateCalculate().dateCalculate(nameToPass: name, currency: self.currencyName, constantAmountToAdd: self.constantAmountToAdd, addEvery: self.addEvery, dateToBegin: self.dateToBegin){ finalAmountRecived in
+                                            DateCalculate().dateCalculate(nameToPass: name, constantAmountToAdd: self.constantAmountToAdd, addEvery: self.addEvery, dateToBegin: self.dateToBegin){ finalAmountRecived in
                                                 
                                                 self.name = name
-                                                sum = Float(sum) + Float(finalAmountRecived)
+                                                sum = sum + finalAmountRecived
                                                 
                                                 self.db.collection("families").document(uid).collection("kids").document(name).setData(["sum" : sum], merge: true)
                                                 
@@ -172,7 +171,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                             self.kidImage = UIImage(named: "userIcon")!
                                                             print(error.localizedDescription)
                                                             
-                                                            let newUser = Kid(name: name, sum:String(format: "%.2f", sum * self.rate), cellColor: self.cellColor, picture: self.kidImage)
+                                                            let newUser = Kid(name: name, sum: String(sum), cellColor: self.cellColor, picture: self.kidImage)
                                                             
                                                             self.kids.append(newUser)
                                                             
@@ -188,7 +187,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                             
                                                             self.kidImage = UIImage(data: data!)!
                                                             
-                                                            let newUser = Kid(name: name, sum: String(format: "%.2f", sum * self.rate), cellColor: self.cellColor, picture: self.kidImage)
+                                                            let newUser = Kid(name: name, sum: String(sum), cellColor: self.cellColor, picture: self.kidImage)
                                                             
                                                             self.kids.append(newUser)
                                                             
@@ -203,7 +202,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                 }else{
                                                     self.kidImage = UIImage(named: "userIcon")!
                                                     
-                                                    let newUser = Kid(name: name, sum: String(format: "%.2f", sum * self.rate), cellColor: self.cellColor, picture: self.kidImage)
+                                                    let newUser = Kid(name: name, sum: String(sum), cellColor: self.cellColor, picture: self.kidImage)
                                                     
                                                     self.kids.append(newUser)
                                                     
@@ -213,6 +212,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                                                     }
                                                 }
                                             }
+                                        } else {
+                                            print("?????????????")
                                         }
                                     }
                                 }
@@ -222,7 +223,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
                 }
             }
         }
-    }
+//    }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
@@ -248,13 +249,13 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
     
     func addMenuItems(userIsAnonymous: Bool) -> UIMenu{
         
-        if userIsAnonymous == true{
+        if userIsAnonymous == true {
             
             let menuItems = UIMenu(title: "Menu", image: UIImage(systemName: "text.justify"), options: .displayInline, children: [
                 
-                UIAction(title: "Preferred Currency", image: UIImage(named: "exchange"), handler: { (_) in
-                    self.performSegue(withIdentifier: "goToCurrency", sender: self)
-                }),
+//                UIAction(title: "Preferred Currency", image: UIImage(named: "exchange"), handler: { (_) in
+//                    self.performSegue(withIdentifier: "goToCurrency", sender: self)
+//                }),
                 
                 UIAction(title: "Sign up to save your data", image: UIImage(named: "newUser") , handler: { (_) in
                     self.performSegue(withIdentifier: "goToSignUpVC", sender: self)
@@ -268,13 +269,13 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
             ])
             return menuItems
             
-        }else{
+        } else {
             
             let menuItems = UIMenu(title: "Menu", image: UIImage(systemName: "text.justify"), options: .displayInline, children: [
                 
-                UIAction(title: "Preferred Currency", image: UIImage(named: "exchange"), handler: { (_) in
-                    self.performSegue(withIdentifier: "goToCurrency", sender: self)
-                }),
+//                UIAction(title: "Preferred Currency", image: UIImage(named: "exchange"), handler: { (_) in
+//                    self.performSegue(withIdentifier: "goToCurrency", sender: self)
+//                }),
                 
                 UIAction(title: "Sign Out", image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), handler: { (_) in
                     print("Sign Out")
@@ -337,7 +338,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
             userDetailsVC.kidsStringToPass = kids
             userDetailsVC.kidsIndex = kidsIndex
             userDetailsVC.currencyNameToPass = currencyName
-            userDetailsVC.rateToPass = rate
             print(kids)
         }
         if let addUserVC = segue.destination as? AddUserVC {

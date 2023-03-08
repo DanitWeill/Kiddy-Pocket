@@ -164,14 +164,14 @@ class AddUserVC: UIViewController, UIColorPickerViewControllerDelegate, UIImageP
     @IBAction func addUserButtonPressed(_ sender: UIButton) {
         if textFieldName.text != "" && textFieldSum.text != "" {
             
-            if let kidName = self.textFieldName.text, let kidSum = Float(self.textFieldSum.text!) {
+            if let kidName = self.textFieldName.text, let kidSum = Int(self.textFieldSum.text!) {
             let db = Firestore.firestore()
             guard let uid = Auth.auth().currentUser?.uid else {return}
 
             // Add a new document in collection "families"
             db.collection("families").document(uid).collection("kids").document(kidName).setData([
                 "name": kidName,
-                "sum": kidSum / rateToPass,
+                "sum": kidSum,
                 "cellColor": self.cellColor.htmlRGBColor,
                 "pictureURL": self.picturePath,
                 "add_every": 0,
